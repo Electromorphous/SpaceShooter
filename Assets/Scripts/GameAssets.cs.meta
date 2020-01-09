@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: f7ecfee46b7407c41854b52a5622cb9b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playerSprite: {fileID: 21300000, guid: f79f07bc2a7b7d74ea3feaa8140bb720, type: 3}
+  - laserSprite: {fileID: 21300000, guid: a06ffdcc45feab14294cdd9e73964201, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
