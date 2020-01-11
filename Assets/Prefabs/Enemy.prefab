@@ -192,10 +192,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57a7101742bd3c42a9e91b9e7b3b7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 5847729475763901967}
-  speed: 7.7
+  force: 555
   maxHealth: 100
   healthBar: {fileID: 5041896692388849580}
+  attackRange: 4
 --- !u!60 &8782261184452915289
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
     public Camera cam;
     Rigidbody2D rb;
     Vector2 mousePos;
-    Vector2 moveDir,lastDir;
+    Vector2 moveDir;
     Vector2 pos;
 
     void Start()

@@ -33,7 +33,11 @@ public class GameHandler : MonoBehaviour
     {
         if(GameObject.Find("Enemy(Clone)") == null)
         {
-            enemyPos = new Vector2(Random.Range(-12, 12), Random.Range(-12, 12));
+            int positive = Random.Range(1, 3);
+            if(positive == 1)
+                enemyPos = new Vector2(Random.Range(-mapSize - 5, -mapSize), Random.Range(-mapSize - 5, -mapSize));
+            else
+                enemyPos = new Vector2(Random.Range(mapSize, mapSize + 5), Random.Range(mapSize, mapSize + 5));
             Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
         }
         
