@@ -9,6 +9,7 @@ public class GameAssets : MonoBehaviour {
         i = this;
     }
 
+    public int mapSize;
     public Sprite damage1;
     public Sprite damage2;
     public Sprite damage3;

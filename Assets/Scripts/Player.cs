@@ -5,37 +5,35 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
-    public Vector2 shipPosition;
-    private float horizAxis;
-    private float vertAxis;
-    public float mapSize = 17;
-    public float speed = 4.2f;
-    private float health;
-    public int maxHealth = 777;
+    int mapSize;
+    public float force;
+    float moveX, moveY;
+    float health;
+    public int maxHealth;
     public GameObject damage;
     public Image healthBar;
+    public Camera cam;
+    Rigidbody2D rb;
+    Vector2 mousePos;
+    Vector2 moveDir,lastDir;
+    Vector2 pos;
 
-    void Start(){
-        shipPosition = new Vector2(0,0);
+    void Start()
+    {
         health = maxHealth;
+        mapSize = GameAssets.i.mapSize;
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update(){
+    void Update()
+    {
+        Movement();
+        HealthHandle();
+    }
 
-        horizAxis = Input.GetAxis("Horizontal");
-        vertAxis = Input.GetAxis("Vertical");
-        
-        if(vertAxis != 0)
-            shipPosition.y += vertAxis * speed * Time.deltaTime;
-        if(horizAxis !=  0)
-            shipPosition.x += horizAxis * speed * Time.deltaTime;
-
-        shipPosition.x = Mathf.Clamp(shipPosition.x, -mapSize + 5, mapSize - 5);
-        shipPosition.y = Mathf.Clamp(shipPosition.y, -mapSize + 5, mapSize - 5);
-
-        transform.position = new Vector3(shipPosition.x, shipPosition.y);
-
-        if(health <= 0.75 * maxHealth && health >= 0.5 * maxHealth)
+    void HealthHandle()
+    {
+        if (health <= 0.75 * maxHealth && health >= 0.5 * maxHealth)
             damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.damage1;
         else if (health <= 0.5 * maxHealth && health >= 0.25 * maxHealth)
             damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.damage2;
@@ -45,9 +43,41 @@ public class Player : MonoBehaviour {
         damage.transform.position = transform.position;
 
         healthBar.fillAmount = health / maxHealth;
-
     }
 
+    void Movement()
+    {
+
+        if (Input.GetKey(KeyCode.W))
+            moveY += +1f;
+        if (Input.GetKey(KeyCode.S))
+            moveY += -1f;
+        if (Input.GetKey(KeyCode.D))
+            moveX += +1f;
+        if (Input.GetKey(KeyCode.A))
+            moveX += -1f;
+
+        moveDir = new Vector2(moveX, moveY).normalized;
+        rb.AddForce(moveDir * force * Time.deltaTime);
+
+        if ((moveX == 0 && moveY == 0) && (Mathf.Abs(rb.velocity.x) >= 0.1 || Mathf.Abs(rb.velocity.x) <= -0.1 || Mathf.Abs(rb.velocity.y) >= 0.1 || Mathf.Abs(rb.velocity.y) <= -0.1))
+            rb.drag = 2;
+        else
+            rb.drag = 1;
+
+        moveX = moveY = 0;
+
+        pos = transform.position;
+        pos.x = Mathf.Clamp(pos.x, -mapSize, mapSize);
+        pos.y = Mathf.Clamp(pos.y, -mapSize, mapSize);
+        transform.position = pos;
+
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 lookDir = mousePos - rb.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+        rb.rotation = angle;
+
+    }
     public void TakeDamage(int damage)
     {
         health -= damage;

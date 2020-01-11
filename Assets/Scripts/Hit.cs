@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Hit : MonoBehaviour
 {
-    private float time = 0;
-    private float delay = 0.1f;
+    float time = 0;
+    float delay = 0.1f;
     void Update()
     {
         time += Time.deltaTime;

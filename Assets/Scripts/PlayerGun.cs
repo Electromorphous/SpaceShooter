@@ -7,15 +7,18 @@ public class PlayerGun : MonoBehaviour
 
     public Transform gun;
     public GameObject laserPrefab;
-    private void Update()
+    void Update()
     {
-        if(Input.GetKeyDown(KeyCode.X)){
+        if(Input.GetButtonDown("Fire1"))
+        {
             shootLaser();
+            
         }
     }
     public void shootLaser(){
 
         Instantiate(laserPrefab, gun.position, gun.rotation);
-
+        
+        
     }
 }

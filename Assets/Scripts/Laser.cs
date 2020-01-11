@@ -8,20 +8,26 @@ public class Laser : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject hitPrefab;
     public int damage;
+    public int laserRange = 17;
+    Vector2 initPos;
 
     void Start()
     {
         rb.velocity = transform.up * speed;
+        initPos = transform.position;
     }
 
     void Update()
     {
-        if (transform.position.y > 17 || transform.position.y < -17)
+        if (Vector2.Distance(initPos, transform.position) > laserRange)
             Destroy(gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
+        if (hitInfo.tag == "Laser")
+            goto a;
+        
         Vector2 hitPosition = transform.position;
         
         Enemy enemy = hitInfo.GetComponent<Enemy>();
@@ -38,5 +44,6 @@ public class Laser : MonoBehaviour
 
         Instantiate(hitPrefab, hitPosition, Quaternion.identity);
 
+        a:;
     }
 }

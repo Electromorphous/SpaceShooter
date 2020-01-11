@@ -6,10 +6,10 @@ public class EnemyGun : MonoBehaviour
 {
     public Transform gun;
     public GameObject laserPrefab;
-    private float time;
+    float time;
     public float delay = 0.5f;
 
-    private void Update()
+    void Update()
     {
 
         time += Time.deltaTime;
