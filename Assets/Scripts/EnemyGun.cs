@@ -7,14 +7,15 @@ public class EnemyGun : MonoBehaviour
     public Transform gun;
     public GameObject laserPrefab;
     float time;
-    public float delay = 0.5f;
+    public float shootDelay;
+    [HideInInspector] public bool shoot = false;
 
     void Update()
     {
 
         time += Time.deltaTime;
         
-        if (time >= delay)
+        if (time >= shootDelay && shoot == true)
         {
             shootLaser();
             time = 0;

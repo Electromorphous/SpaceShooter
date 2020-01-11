@@ -5,21 +5,27 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     public float speed;
+    float time = 0;
     public Rigidbody2D rb;
     public GameObject hitPrefab;
     public int damage;
-    public int laserRange = 17;
+    public int laserLife;
     Vector2 initPos;
+    public GameObject thing;
 
     void Start()
     {
-        rb.velocity = transform.up * speed;
+        if (thing == null)
+            thing = GameAssets.i.player;
+        Vector3 gunVelocity = thing.GetComponent<Rigidbody2D>().velocity;
+        rb.velocity = transform.up * speed + gunVelocity;
         initPos = transform.position;
     }
 
     void Update()
     {
-        if (Vector2.Distance(initPos, transform.position) > laserRange)
+        time += Time.deltaTime;
+        if (time > laserLife)
             Destroy(gameObject);
     }
 

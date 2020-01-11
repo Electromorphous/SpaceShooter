@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Laser
+  - bluePill
+  - yellowPill
+  - greenPill
   layers:
   - Default
   - TransparentFX

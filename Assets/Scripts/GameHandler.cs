@@ -5,6 +5,10 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject yellowPillPrefab;
+    public GameObject bluePillPrefab;
+    public GameObject greenPillPrefab;
+    GameObject[] getCount;
     Vector2 enemyPos;
     public GameObject star1;
     public GameObject star2;
@@ -40,7 +44,28 @@ public class GameHandler : MonoBehaviour
                 enemyPos = new Vector2(Random.Range(mapSize, mapSize + 5), Random.Range(mapSize, mapSize + 5));
             Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
         }
-        
+
+        getCount = GameObject.FindGameObjectsWithTag("yellowPill");
+        if (getCount.Length <= 2)
+        {
+            Vector2 pillPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
+            Instantiate(yellowPillPrefab, pillPos, Quaternion.identity);
+        }
+
+        getCount = GameObject.FindGameObjectsWithTag("bluePill");
+        if (getCount.Length <= 1)
+        {
+            Vector2 pillPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
+            Instantiate(bluePillPrefab, pillPos, Quaternion.identity);
+        }
+
+        getCount = GameObject.FindGameObjectsWithTag("greenPill");
+        if (getCount.Length == 0)
+        {
+            Vector2 pillPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
+            Instantiate(greenPillPrefab, pillPos, Quaternion.identity);
+        }
+
     }
 
 }

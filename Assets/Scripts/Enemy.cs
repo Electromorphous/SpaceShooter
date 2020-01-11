@@ -12,26 +12,29 @@ public class Enemy : MonoBehaviour
     float health;
     public float maxHealth = 100;
     public Image healthBar;
-    Vector2 pos;
-    int mapSize;
     GameObject target;
     public int attackRange;
+    public GameObject enemyGun;
 
     void Start()
     {
         health = maxHealth;
         target = GameAssets.i.player;
-        mapSize = GameAssets.i.mapSize;
         rb = GetComponent<Rigidbody2D>();
-        pos = transform.position;
     }
 
     void Update()
     {
         if (Vector3.Distance(transform.position, target.transform.position) > attackRange)
+        {
             Movement();
+            enemyGun.GetComponent<EnemyGun>().shoot = false;
+        }
         else
+        {
             rb.velocity = new Vector2(0, 0);
+            enemyGun.GetComponent<EnemyGun>().shoot = true;
+        }
 
         Vector2 lookDir = target.transform.position - transform.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;

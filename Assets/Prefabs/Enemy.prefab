@@ -195,7 +195,8 @@ MonoBehaviour:
   force: 555
   maxHealth: 100
   healthBar: {fileID: 5041896692388849580}
-  attackRange: 4
+  attackRange: 7
+  enemyGun: {fileID: 9075483978640790798}
 --- !u!60 &8782261184452915289
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -455,4 +456,5 @@ MonoBehaviour:
   gun: {fileID: 5250615533445372152}
   laserPrefab: {fileID: 6134650772774935171, guid: 2114c8278de4dca419e495c130d84f67,
     type: 3}
-  delay: 0.5
+  shootDelay: 0.2
+  shoot: 0

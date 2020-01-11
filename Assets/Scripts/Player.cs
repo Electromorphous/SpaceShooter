@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
     int mapSize;
     public float force;
     float moveX, moveY;
+    [HideInInspector] public float finalHealth;
     float health;
     public int maxHealth;
     public GameObject damage;
@@ -20,7 +21,7 @@ public class Player : MonoBehaviour {
 
     void Start()
     {
-        health = maxHealth;
+        finalHealth = health = maxHealth;
         mapSize = GameAssets.i.mapSize;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -33,15 +34,20 @@ public class Player : MonoBehaviour {
 
     void HealthHandle()
     {
+
         if (health <= 0.75 * maxHealth && health >= 0.5 * maxHealth)
             damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.damage1;
         else if (health <= 0.5 * maxHealth && health >= 0.25 * maxHealth)
             damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.damage2;
         else if (health <= 0.25 * maxHealth)
             damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.damage3;
+        else
+            damage.GetComponent<SpriteRenderer>().sprite = null;
 
         damage.transform.position = transform.position;
 
+        if (Mathf.Abs(health - finalHealth) > 0.5f)
+            health -= Time.deltaTime * (health - finalHealth) * 10f;
         healthBar.fillAmount = health / maxHealth;
     }
 
@@ -80,11 +86,11 @@ public class Player : MonoBehaviour {
     }
     public void TakeDamage(int damage)
     {
-        health -= damage;
+        finalHealth = health - damage;
 
         DamagePopup.Create(transform.position, damage);
 
-        if (health <= 0)
+        if (finalHealth <= 0)
         {
             Die();
         }
