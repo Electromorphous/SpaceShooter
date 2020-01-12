@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 281750405}
   m_Layer: 0
   m_Name: PLayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 777
-  health: 0
+  finalHealth: 0
   maxHealth: 777
   damage: {fileID: 1909482851}
   healthBar: {fileID: 1437943855}
@@ -646,7 +646,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &680922268
 SpriteRenderer:
   m_ObjectHideFlags: 0

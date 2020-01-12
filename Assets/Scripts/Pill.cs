@@ -19,13 +19,27 @@ public class Pill : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, angle);
 
         health = player.GetComponent<Player>().finalHealth;
-        if(Vector3.Distance(transform.position, player.transform.position) < 0.77f)
+
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+
+        Debug.Log("Trigger detected");
+        if(other.CompareTag("Player"))
         {
-            health += maxHealth * healing;
-            if (health > maxHealth)
-                health = maxHealth;
-            player.GetComponent<Player>().finalHealth = health;
-            Destroy(gameObject);
+            PickUp();
+            Debug.Log("Picked Up");
         }
+    }
+
+    void PickUp()
+    {
+        health += maxHealth * healing;
+        if (health > maxHealth)
+            health = maxHealth;
+        player.GetComponent<Player>().finalHealth = health;
+        
+        Destroy(gameObject);
     }
 }

@@ -49,6 +49,9 @@ public class Player : MonoBehaviour {
         if (Mathf.Abs(health - finalHealth) > 0.5f)
             health -= Time.deltaTime * (health - finalHealth) * 10f;
         healthBar.fillAmount = health / maxHealth;
+
+        if (health <= 0)
+            Die();
     }
 
     void Movement()
@@ -90,15 +93,12 @@ public class Player : MonoBehaviour {
 
         DamagePopup.Create(transform.position, damage);
 
-        if (finalHealth <= 0)
-        {
-            Die();
-        }
     }
 
     void Die()
     {
         Destroy(gameObject);
+        
     }
 
 }

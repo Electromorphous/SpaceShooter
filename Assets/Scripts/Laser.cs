@@ -31,7 +31,7 @@ public class Laser : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.tag == "Laser")
+        if (hitInfo.CompareTag("Laser"))   // || hitInfo.CompareTag("bluePill") || hitInfo.CompareTag("greenPill") || hitInfo.CompareTag("yellowPill") || hitInfo.CompareTag("Shield") || hitInfo.CompareTag("Adrenaline"))
             goto a;
         
         Vector2 hitPosition = transform.position;

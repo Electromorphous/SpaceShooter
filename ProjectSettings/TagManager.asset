@@ -9,6 +9,8 @@ TagManager:
   - bluePill
   - yellowPill
   - greenPill
+  - Shield
+  - Adrenaline
   layers:
   - Default
   - TransparentFX
