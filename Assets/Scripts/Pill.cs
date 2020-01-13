@@ -7,10 +7,16 @@ public class Pill : MonoBehaviour
     GameObject player;
     float health, maxHealth;
     public float healing;
+    public float lifeSpan;
+    float time;
+    public GameObject pickUp, vanish;
+    
+
     private void Start()
     {
         player = GameAssets.i.player;
         maxHealth = player.GetComponent<Player>().maxHealth;
+        time = 0;
     }
     void Update()
     {
@@ -20,16 +26,19 @@ public class Pill : MonoBehaviour
 
         health = player.GetComponent<Player>().finalHealth;
 
+        time += Time.deltaTime;
+        if (time >= lifeSpan)
+        {
+            Instantiate(vanish, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-
-        Debug.Log("Trigger detected");
         if(other.CompareTag("Player"))
         {
             PickUp();
-            Debug.Log("Picked Up");
         }
     }
 
@@ -39,7 +48,8 @@ public class Pill : MonoBehaviour
         if (health > maxHealth)
             health = maxHealth;
         player.GetComponent<Player>().finalHealth = health;
-        
+
+        Instantiate(pickUp, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }

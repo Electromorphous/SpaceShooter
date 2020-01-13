@@ -10,16 +10,14 @@ public class Laser : MonoBehaviour
     public GameObject hitPrefab;
     public int damage;
     public int laserLife;
-    Vector2 initPos;
-    public GameObject thing;
+    public GameObject gun;
 
     void Start()
     {
-        if (thing == null)
-            thing = GameAssets.i.player;
-        Vector3 gunVelocity = thing.GetComponent<Rigidbody2D>().velocity;
+        if (gun == null)
+            gun = GameAssets.i.player;
+        Vector3 gunVelocity = gun.GetComponent<Rigidbody2D>().velocity;
         rb.velocity = transform.up * speed + gunVelocity;
-        initPos = transform.position;
     }
 
     void Update()
@@ -31,7 +29,7 @@ public class Laser : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.CompareTag("Laser"))   // || hitInfo.CompareTag("bluePill") || hitInfo.CompareTag("greenPill") || hitInfo.CompareTag("yellowPill") || hitInfo.CompareTag("Shield") || hitInfo.CompareTag("Adrenaline"))
+        if (hitInfo.CompareTag("Laser") || GameAssets.i.IsPowerUp(hitInfo))
             goto a;
         
         Vector2 hitPosition = transform.position;

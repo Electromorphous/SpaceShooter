@@ -36,14 +36,27 @@ public class Player : MonoBehaviour {
     {
 
         if (health <= 0.75 * maxHealth && health >= 0.5 * maxHealth)
+        {
             damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.damage1;
-        else if (health <= 0.5 * maxHealth && health >= 0.25 * maxHealth)
-            damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.damage2;
-        else if (health <= 0.25 * maxHealth)
-            damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.damage3;
-        else
-            damage.GetComponent<SpriteRenderer>().sprite = null;
+            healthBar.color = GameAssets.i.GetColorFromHex("ffff00");
+        }
 
+        else if (health <= 0.5 * maxHealth && health >= 0.25 * maxHealth)
+        {
+            damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.damage2;
+            healthBar.color = GameAssets.i.GetColorFromHex("FF6E00");
+        }
+        else if (health <= 0.25 * maxHealth)
+        {
+            damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.damage3;
+            healthBar.color = GameAssets.i.GetColorFromHex("ff0000");
+        }
+        else
+        {
+            damage.GetComponent<SpriteRenderer>().sprite = null;
+            healthBar.color = GameAssets.i.GetColorFromHex("00ff00");
+        }
+            
         damage.transform.position = transform.position;
 
         if (Mathf.Abs(health - finalHealth) > 0.5f)
