@@ -8,16 +8,20 @@ public class Player : MonoBehaviour {
     int mapSize;
     public float force;
     float moveX, moveY;
-    [HideInInspector] public float finalHealth;
-    float health;
-    public int maxHealth;
-    public GameObject damage;
-    public Image healthBar;
+    [HideInInspector] public float finalHealth, finalShield;
+    float health, shield;
+    public int maxHealth, maxShield;
+    public GameObject damage, shieldPrefab;
+    public Image healthBar, shieldBar;
     public Camera cam;
     Rigidbody2D rb;
     Vector2 mousePos;
     Vector2 moveDir;
     Vector2 pos;
+
+    [HideInInspector] public enum shieldState
+    { disabled, power1, power2, power3 }
+    [HideInInspector] public shieldState state;
 
     void Start()
     {
@@ -30,8 +34,41 @@ public class Player : MonoBehaviour {
     {
         Movement();
         HealthHandle();
+        ShieldHandle();
     }
 
+    void ShieldHandle()
+    {
+        if(shield <= maxShield && shield >= 0.667 * maxShield)
+        {
+            damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.shield3;
+            state = shieldState.power3;
+        }
+        else if (shield <= 0.667 * maxShield && shield >= 0.333 * maxShield)
+        {
+            damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.shield2;
+            state = shieldState.power2;
+        }
+
+        else if (shield <= 0.333 * maxShield && shield > 0)
+        {
+            damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.shield1;
+            state = shieldState.power1;
+        }
+        else
+        {
+            shield = 0;
+            damage.GetComponent<SpriteRenderer>().sprite = null;
+            state = shieldState.disabled;
+        }
+
+        damage.transform.position = transform.position;
+
+        if (Mathf.Abs(shield - finalShield) > 0.5f)
+            shield -= Time.deltaTime * (shield - finalShield) * 10f;
+        shieldBar.fillAmount = shield / maxShield;
+
+    }
     void HealthHandle()
     {
 
@@ -102,7 +139,10 @@ public class Player : MonoBehaviour {
     }
     public void TakeDamage(int damage)
     {
-        finalHealth = health - damage;
+        if (state == shieldState.disabled)
+            finalHealth = health - damage;
+        else
+            finalShield = shield - damage;
 
         DamagePopup.Create(transform.position, damage);
 

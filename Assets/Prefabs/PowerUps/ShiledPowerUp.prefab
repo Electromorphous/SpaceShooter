@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5223129844265027690}
   - component: {fileID: 749760257352240460}
   - component: {fileID: 7259432554184704087}
+  - component: {fileID: -6270697905980411306}
   m_Layer: 0
   m_Name: ShiledPowerUp
   m_TagString: ShieldPowerUp
@@ -4820,3 +4821,19 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &-6270697905980411306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5655044747042898698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7132ff402e63ec459c9dbe367de13bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shielding: 0.25
+  lifeSpan: 10
+  pickUp: {fileID: 859330257492410370, guid: 7c7cd17ea30a80e43ae31a770021e8ea, type: 3}
+  vanish: {fileID: 4994734998937984222, guid: e02be1d313d1bb14585d5bc3651add1f, type: 3}

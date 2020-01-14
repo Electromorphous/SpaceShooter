@@ -10,9 +10,8 @@ public class GameAssets : MonoBehaviour {
     }
 
     public int mapSize;
-    public Sprite damage1;
-    public Sprite damage2;
-    public Sprite damage3;
+    public Sprite damage1, damage2, damage3;
+    public Sprite shield1, shield2, shield3;
     public Transform damagePopupPrefab;
     public GameObject player;
 
