@@ -251,22 +251,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3001954245073768712, guid: e44e616159ec9e746953749550675f57,
     type: 3}
+  star1: {fileID: 7911873045673393092, guid: d0662fa557e5f6d4da171da380e88eb3, type: 3}
+  star2: {fileID: 5394904047500292640, guid: b25bd52fb48849d47985a883ab57284d, type: 3}
+  star3: {fileID: 9012158703702470315, guid: bfd19b95d81c6cf4b8693e8740ee0232, type: 3}
+  cursor: {fileID: 806867039}
+  cam: {fileID: 519420031}
   yellowPillPrefab: {fileID: 5312700897644873361, guid: b6ec0f75d349e5d45b6eda295a710453,
     type: 3}
   bluePillPrefab: {fileID: 5314788183235692073, guid: 00161fc33c396c54a97f5266244eac5f,
     type: 3}
   greenPillPrefab: {fileID: 6906055646970425126, guid: b4f0e975ce168f6439952489b6667a79,
     type: 3}
-  star1: {fileID: 7911873045673393092, guid: d0662fa557e5f6d4da171da380e88eb3, type: 3}
-  star2: {fileID: 5394904047500292640, guid: b25bd52fb48849d47985a883ab57284d, type: 3}
-  star3: {fileID: 9012158703702470315, guid: bfd19b95d81c6cf4b8693e8740ee0232, type: 3}
+  shieldPrefab: {fileID: 5655044747042898698, guid: b823aa5e00d4d87409105b7e8b1ee417,
+    type: 3}
   yellowDelay: 1
   blueDelay: 1
   greenDelay: 1
+  shieldDelay: 1
   pillSpawn: {fileID: 2536891941698187358, guid: 2ae78f0148baf594fa263950e303e461,
     type: 3}
-  cursor: {fileID: 806867039}
-  cam: {fileID: 519420031}
+  shieldSpawn: {fileID: 6258155999508393438, guid: 07d426763032af243a4abb9085373b8f,
+    type: 3}
 --- !u!212 &53708074
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -324,7 +329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53708072}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.44, z: 0}
   m_LocalScale: {x: 42, y: 42, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -531,7 +536,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281750404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.14, y: -3.64, z: 0.29}
+  m_LocalPosition: {x: -4.44, y: -4.89, z: 0.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1909482853}
@@ -712,7 +717,7 @@ Transform:
   m_GameObject: {fileID: 806867039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.6, y: 0.3, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

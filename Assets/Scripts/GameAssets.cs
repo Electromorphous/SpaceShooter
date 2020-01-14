@@ -18,7 +18,7 @@ public class GameAssets : MonoBehaviour {
 
     public bool IsPowerUp(Collider2D hitInfo)
     {
-        if (hitInfo.CompareTag("bluePill") || hitInfo.CompareTag("greenPill") || hitInfo.CompareTag("yellowPill") || hitInfo.CompareTag("Shield") || hitInfo.CompareTag("Adrenaline"))
+        if (hitInfo.CompareTag("bluePill") || hitInfo.CompareTag("greenPill") || hitInfo.CompareTag("yellowPill") || hitInfo.CompareTag("ShieldPowerUp") || hitInfo.CompareTag("Adrenaline"))
             return true;
         return false;
     }

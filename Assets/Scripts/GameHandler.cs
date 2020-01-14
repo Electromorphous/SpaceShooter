@@ -5,27 +5,27 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public GameObject yellowPillPrefab;
-    public GameObject bluePillPrefab;
-    public GameObject greenPillPrefab;
-    Vector2 enemyPos;
+    Vector2 enemyspawnPos;
+
     public GameObject star1;
     public GameObject star2;
     public GameObject star3;
     int starCount;
     int mapSize;
-    public float yellowDelay, blueDelay, greenDelay;
-    float yellowTime, blueTime, greenTime;
-    Transform playerPos;
-    public GameObject pillSpawn;
+    Transform playerspawnPos;
     public GameObject cursor;
     public Camera cam;
 
+    public GameObject yellowPillPrefab, bluePillPrefab, greenPillPrefab, shieldPrefab;
+    public float yellowDelay, blueDelay, greenDelay, shieldDelay;
+    float yellowTime, blueTime, greenTime, shieldTime;
+    public GameObject pillSpawn, shieldSpawn;
+
     void Start()
     {
-        playerPos = GameAssets.i.player.transform;
+        playerspawnPos = GameAssets.i.player.transform;
 
-        yellowTime = blueTime = greenTime = 0;
+        yellowTime = blueTime = greenTime = shieldTime = 0;
 
         mapSize = GameAssets.i.mapSize;
         starCount = mapSize / 2;
@@ -50,27 +50,28 @@ public class GameHandler : MonoBehaviour
         yellowTime += Time.deltaTime;
         blueTime += Time.deltaTime;
         greenTime += Time.deltaTime;
+        shieldTime += Time.deltaTime;
 
         if (GameObject.Find("Enemy(Clone)") == null)
         {
             int positive = Random.Range(1, 3);
             if(positive == 1)
-                enemyPos = new Vector2(Random.Range(-mapSize - 5, -mapSize), Random.Range(-mapSize - 5, -mapSize));
+                enemyspawnPos = new Vector2(Random.Range(-mapSize - 5, -mapSize), Random.Range(-mapSize - 5, -mapSize));
             else
-                enemyPos = new Vector2(Random.Range(mapSize, mapSize + 5), Random.Range(mapSize, mapSize + 5));
-            Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
+                enemyspawnPos = new Vector2(Random.Range(mapSize, mapSize + 5), Random.Range(mapSize, mapSize + 5));
+            Instantiate(enemyPrefab, enemyspawnPos, Quaternion.identity);
         }
 
-        Vector2 pillPos;
+        Vector2 spawnPos;
         if (yellowTime >= yellowDelay)
         {
             do
             {
-                pillPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
-            } while (Vector2.Distance(pillPos, playerPos.position) <= 0.7f);
+                spawnPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
+            } while (Vector2.Distance(spawnPos, playerspawnPos.position) <= 0.7f);
 
-            Instantiate(pillSpawn, pillPos, Quaternion.identity);
-            Instantiate(yellowPillPrefab, pillPos, Quaternion.identity);
+            Instantiate(pillSpawn, spawnPos, Quaternion.identity);
+            Instantiate(yellowPillPrefab, spawnPos, Quaternion.identity);
             yellowTime -= yellowDelay;
         }
 
@@ -78,11 +79,11 @@ public class GameHandler : MonoBehaviour
         {
             do
             {
-                pillPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
-            } while (Vector2.Distance(pillPos, playerPos.position) <= 0.7f);
+                spawnPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
+            } while (Vector2.Distance(spawnPos, playerspawnPos.position) <= 0.7f);
 
-            Instantiate(pillSpawn, pillPos, Quaternion.identity);
-            Instantiate(bluePillPrefab, pillPos, Quaternion.identity);
+            Instantiate(pillSpawn, spawnPos, Quaternion.identity);
+            Instantiate(bluePillPrefab, spawnPos, Quaternion.identity);
             blueTime -= blueDelay;
         }
 
@@ -90,14 +91,25 @@ public class GameHandler : MonoBehaviour
         {
             do
             {
-                pillPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
-            } while (Vector2.Distance(pillPos, playerPos.position) <= 0.7f);
+                spawnPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
+            } while (Vector2.Distance(spawnPos, playerspawnPos.position) <= 0.7f);
 
-            Instantiate(pillSpawn, pillPos, Quaternion.identity);
-            Instantiate(greenPillPrefab, pillPos, Quaternion.identity);
+            Instantiate(pillSpawn, spawnPos, Quaternion.identity);
+            Instantiate(greenPillPrefab, spawnPos, Quaternion.identity);
             greenTime -= greenDelay;
         }
 
+        if (shieldTime >= shieldDelay)
+        {
+            do
+            {
+                spawnPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
+            } while (Vector2.Distance(spawnPos, playerspawnPos.position) <= 0.7f);
+
+            Instantiate(shieldSpawn, spawnPos, Quaternion.identity);
+            Instantiate(shieldPrefab, spawnPos, Quaternion.identity);
+            shieldTime -= shieldDelay;
+        }
     }
 
 }

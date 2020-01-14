@@ -11,6 +11,7 @@ TagManager:
   - greenPill
   - Shield
   - Adrenaline
+  - ShieldPowerUp
   layers:
   - Default
   - TransparentFX
