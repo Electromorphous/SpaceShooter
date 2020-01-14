@@ -34,14 +34,14 @@ public class Laser : MonoBehaviour
         
         Vector2 hitPosition = transform.position;
         
-        Enemy enemy = hitInfo.GetComponent<Enemy>();
-        if(enemy != null)
+        if(hitInfo.CompareTag("Enemy"))
         {
+            Enemy enemy = hitInfo.GetComponent<Enemy>();
             enemy.TakeDamage(damage);
         }
-        Player player = hitInfo.GetComponent<Player>();
-        if(player != null)
+        if(hitInfo.CompareTag("Player"))
         {
+            Player player = GameAssets.i.player.GetComponent<Player>();
             player.TakeDamage(damage);
         }
         Destroy(gameObject);

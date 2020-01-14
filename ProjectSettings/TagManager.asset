@@ -9,7 +9,6 @@ TagManager:
   - bluePill
   - yellowPill
   - greenPill
-  - Shield
   - Adrenaline
   - ShieldPowerUp
   layers:

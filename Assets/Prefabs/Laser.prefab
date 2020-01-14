@@ -139,3 +139,4 @@ MonoBehaviour:
   damage: 20
   laserLife: 2
   gun: {fileID: 0}
+  laserName: Player

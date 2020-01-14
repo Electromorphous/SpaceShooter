@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
     [HideInInspector] public float finalHealth, finalShield;
     float health, shield;
     public int maxHealth, maxShield;
-    public GameObject damage, shieldPrefab;
+    public GameObject damage, shieldSprite;
     public Image healthBar, shieldBar;
     public Camera cam;
     Rigidbody2D rb;
@@ -19,9 +19,9 @@ public class Player : MonoBehaviour {
     Vector2 moveDir;
     Vector2 pos;
 
-    [HideInInspector] public enum shieldState
+    [HideInInspector] public enum ShieldState
     { disabled, power1, power2, power3 }
-    [HideInInspector] public shieldState state;
+    [HideInInspector] public ShieldState state;
 
     void Start()
     {
@@ -41,32 +41,37 @@ public class Player : MonoBehaviour {
     {
         if(shield <= maxShield && shield >= 0.667 * maxShield)
         {
-            damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.shield3;
-            state = shieldState.power3;
+            shieldSprite.GetComponent<SpriteRenderer>().sprite = GameAssets.i.shield3;
+            state = ShieldState.power3;
         }
         else if (shield <= 0.667 * maxShield && shield >= 0.333 * maxShield)
         {
-            damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.shield2;
-            state = shieldState.power2;
+            shieldSprite.GetComponent<SpriteRenderer>().sprite = GameAssets.i.shield2;
+            state = ShieldState.power2;
         }
 
         else if (shield <= 0.333 * maxShield && shield > 0)
         {
-            damage.GetComponent<SpriteRenderer>().sprite = GameAssets.i.shield1;
-            state = shieldState.power1;
+            shieldSprite.GetComponent<SpriteRenderer>().sprite = GameAssets.i.shield1;
+            state = ShieldState.power1;
         }
         else
         {
             shield = 0;
-            damage.GetComponent<SpriteRenderer>().sprite = null;
-            state = shieldState.disabled;
+            shieldSprite.GetComponent<SpriteRenderer>().sprite = null;
+            state = ShieldState.disabled;
         }
 
-        damage.transform.position = transform.position;
+        shieldSprite.transform.position = transform.position;
 
         if (Mathf.Abs(shield - finalShield) > 0.5f)
             shield -= Time.deltaTime * (shield - finalShield) * 10f;
         shieldBar.fillAmount = shield / maxShield;
+
+        /*if (state == ShieldState.disabled)
+            shieldSprite.GetComponent<CircleCollider2D>().enabled = false;
+        else
+            shieldSprite.GetComponent<CircleCollider2D>().enabled = true;*/
 
     }
     void HealthHandle()
@@ -139,7 +144,7 @@ public class Player : MonoBehaviour {
     }
     public void TakeDamage(int damage)
     {
-        if (state == shieldState.disabled)
+        if (state == ShieldState.disabled)
             finalHealth = health - damage;
         else
             finalShield = shield - damage;

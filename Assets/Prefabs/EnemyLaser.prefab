@@ -139,3 +139,4 @@ MonoBehaviour:
   damage: 15
   laserLife: 1
   gun: {fileID: 3001954245073768712, guid: e44e616159ec9e746953749550675f57, type: 3}
+  laserName: Enemy
