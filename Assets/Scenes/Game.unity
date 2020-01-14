@@ -264,13 +264,18 @@ MonoBehaviour:
     type: 3}
   shieldPrefab: {fileID: 5655044747042898698, guid: b823aa5e00d4d87409105b7e8b1ee417,
     type: 3}
+  adrenalinePrefab: {fileID: 5651149238189220287, guid: 660a9b4faaf069343aa91aed7747bf89,
+    type: 3}
   yellowDelay: 1
   blueDelay: 1
   greenDelay: 1
   shieldDelay: 1
+  adrenalineDelay: 1
   pillSpawn: {fileID: 2536891941698187358, guid: 2ae78f0148baf594fa263950e303e461,
     type: 3}
   shieldSpawn: {fileID: 6258155999508393438, guid: 07d426763032af243a4abb9085373b8f,
+    type: 3}
+  adrenalineSpawn: {fileID: 4351783777676671244, guid: 198ca816a26042c40a37d001019e6046,
     type: 3}
 --- !u!212 &53708074
 SpriteRenderer:
@@ -486,6 +491,7 @@ MonoBehaviour:
   healthBar: {fileID: 1437943855}
   shieldBar: {fileID: 1494014431}
   cam: {fileID: 519420031}
+  hyper: 0
   state: 0
 --- !u!212 &281750408
 SpriteRenderer:
@@ -983,7 +989,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1709372097}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00999999, y: 0.9, z: 0}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 281750409}

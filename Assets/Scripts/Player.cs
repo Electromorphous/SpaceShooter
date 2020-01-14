@@ -19,6 +19,8 @@ public class Player : MonoBehaviour {
     Vector2 moveDir;
     Vector2 pos;
 
+    [HideInInspector] public bool hyper;
+
     [HideInInspector] public enum ShieldState
     { disabled, power1, power2, power3 }
     [HideInInspector] public ShieldState state;
@@ -28,13 +30,20 @@ public class Player : MonoBehaviour {
         finalHealth = health = maxHealth;
         mapSize = GameAssets.i.mapSize;
         rb = GetComponent<Rigidbody2D>();
+
+        hyper = false;
     }
 
     void Update()
     {
-        Movement();
+        if (hyper == true)
+            FastMovement();
+        else
+            Movement();
+
         HealthHandle();
         ShieldHandle();
+
     }
 
     void ShieldHandle()
@@ -67,11 +76,6 @@ public class Player : MonoBehaviour {
         if (Mathf.Abs(shield - finalShield) > 0.5f)
             shield -= Time.deltaTime * (shield - finalShield) * 10f;
         shieldBar.fillAmount = shield / maxShield;
-
-        /*if (state == ShieldState.disabled)
-            shieldSprite.GetComponent<CircleCollider2D>().enabled = false;
-        else
-            shieldSprite.GetComponent<CircleCollider2D>().enabled = true;*/
 
     }
     void HealthHandle()
@@ -136,11 +140,45 @@ public class Player : MonoBehaviour {
         pos.y = Mathf.Clamp(pos.y, -mapSize, mapSize);
         transform.position = pos;
 
+        Look();
+
+    }
+
+    void FastMovement()
+    {
+        if (Input.GetKey(KeyCode.W))
+            moveY += +1f;
+        if (Input.GetKey(KeyCode.S))
+            moveY += -1f;
+        if (Input.GetKey(KeyCode.D))
+            moveX += +1f;
+        if (Input.GetKey(KeyCode.A))
+            moveX += -1f;
+
+        moveDir = new Vector2(moveX, moveY).normalized;
+        rb.AddForce(moveDir * force * Time.deltaTime);
+
+        if ((moveX == 0 && moveY == 0) && (Mathf.Abs(rb.velocity.x) >= 0.1 || Mathf.Abs(rb.velocity.x) <= -0.1 || Mathf.Abs(rb.velocity.y) >= 0.1 || Mathf.Abs(rb.velocity.y) <= -0.1))
+            rb.drag = 2;
+        else
+            rb.drag = 1;
+
+        moveX = moveY = 0;
+
+        pos = transform.position;
+        pos.x = Mathf.Clamp(pos.x, -mapSize, mapSize);
+        pos.y = Mathf.Clamp(pos.y, -mapSize, mapSize);
+        transform.position = pos;
+
+        Look();
+    }
+
+    void Look()
+    {
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 lookDir = mousePos - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;
-
     }
     public void TakeDamage(int damage)
     {

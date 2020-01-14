@@ -16,10 +16,10 @@ public class GameHandler : MonoBehaviour
     public GameObject cursor;
     public Camera cam;
 
-    public GameObject yellowPillPrefab, bluePillPrefab, greenPillPrefab, shieldPrefab;
-    public float yellowDelay, blueDelay, greenDelay, shieldDelay;
-    float yellowTime, blueTime, greenTime, shieldTime;
-    public GameObject pillSpawn, shieldSpawn;
+    public GameObject yellowPillPrefab, bluePillPrefab, greenPillPrefab, shieldPrefab, adrenalinePrefab;
+    public float yellowDelay, blueDelay, greenDelay, shieldDelay, adrenalineDelay;
+    float yellowTime, blueTime, greenTime, shieldTime, adrenalineTime;
+    public GameObject pillSpawn, shieldSpawn, adrenalineSpawn;
 
     void Start()
     {
@@ -51,6 +51,7 @@ public class GameHandler : MonoBehaviour
         blueTime += Time.deltaTime;
         greenTime += Time.deltaTime;
         shieldTime += Time.deltaTime;
+        adrenalineTime += Time.deltaTime;
 
         if (GameObject.Find("Enemy(Clone)") == null)
         {
@@ -109,6 +110,18 @@ public class GameHandler : MonoBehaviour
             Instantiate(shieldSpawn, spawnPos, Quaternion.identity);
             Instantiate(shieldPrefab, spawnPos, Quaternion.identity);
             shieldTime -= shieldDelay;
+        }
+
+        if (adrenalineTime >= adrenalineDelay)
+        {
+            do
+            {
+                spawnPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
+            } while (Vector2.Distance(spawnPos, playerspawnPos.position) <= 0.7f);
+
+            Instantiate(adrenalineSpawn, spawnPos, Quaternion.identity);
+            Instantiate(adrenalinePrefab, spawnPos, Quaternion.identity);
+            adrenalineTime -= adrenalineDelay;
         }
     }
 
