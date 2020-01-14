@@ -493,6 +493,7 @@ MonoBehaviour:
   cam: {fileID: 519420031}
   hyper: 0
   state: 0
+  lastingHyperTime: 0
 --- !u!212 &281750408
 SpriteRenderer:
   m_ObjectHideFlags: 0
