@@ -25,6 +25,9 @@ public class Player : MonoBehaviour {
     { disabled, power1, power2, power3 }
     [HideInInspector] public ShieldState state;
 
+    float hyperTime;
+    [HideInInspector] public float lastingHyperTime;
+
     void Start()
     {
         finalHealth = health = maxHealth;
@@ -32,14 +35,21 @@ public class Player : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
 
         hyper = false;
+        hyperTime = 0;
     }
 
     void Update()
     {
-        if (hyper == true)
-            FastMovement();
-        else
+        if (hyper == false)
             Movement();
+        else if (hyperTime <= lastingHyperTime && hyper == true)
+        {
+            FastMovement();
+            hyperTime += Time.deltaTime;
+        }
+
+        if (hyperTime >= lastingHyperTime)
+            hyperTime = 0;
 
         HealthHandle();
         ShieldHandle();

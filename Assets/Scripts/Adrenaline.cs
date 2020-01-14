@@ -6,7 +6,8 @@ public class Adrenaline : MonoBehaviour
 {
     GameObject player;
     float time;
-    public float lastingTime, lifeSpan;
+    public float lastingTime;
+    public float lifeSpan;
     public GameObject pickUp, vanish;
 
     void Start()
@@ -37,7 +38,7 @@ public class Adrenaline : MonoBehaviour
     void PickUp()
     {
         player.GetComponent<Player>().hyper = true;
-        Debug.Log("hyper = true");
+        player.GetComponent<Player>().lastingHyperTime = lastingTime;
         Instantiate(pickUp, transform.position, transform.rotation);
         Destroy(gameObject);
     }
