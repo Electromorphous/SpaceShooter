@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4662813217839195430}
   - component: {fileID: 1013214749265344783}
   - component: {fileID: 6260820910963465373}
+  - component: {fileID: -1028282792610885619}
   m_Layer: 0
   m_Name: AdrenalinePickUp
   m_TagString: Untagged
@@ -4753,3 +4754,15 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-1028282792610885619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283275457676086818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb9cf323ef72cea4fa3fe73c20460e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

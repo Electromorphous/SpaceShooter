@@ -48,8 +48,11 @@ public class Player : MonoBehaviour {
             hyperTime += Time.deltaTime;
         }
 
-        if (hyperTime >= lastingHyperTime)
+        if (hyperTime > lastingHyperTime)
+        {
             hyperTime = 0;
+            hyper = false;
+        }
 
         HealthHandle();
         ShieldHandle();
@@ -125,15 +128,16 @@ public class Player : MonoBehaviour {
 
     void Movement()
     {
-
+        rb.mass = 0.5f;
+        
         if (Input.GetKey(KeyCode.W))
-            moveY += +1f;
+            moveY += 1f;
         if (Input.GetKey(KeyCode.S))
-            moveY += -1f;
+            moveY -= 1f;
         if (Input.GetKey(KeyCode.D))
-            moveX += +1f;
+            moveX += 1f;
         if (Input.GetKey(KeyCode.A))
-            moveX += -1f;
+            moveX -= 1f;
 
         moveDir = new Vector2(moveX, moveY).normalized;
         rb.AddForce(moveDir * force * Time.deltaTime);
@@ -156,17 +160,46 @@ public class Player : MonoBehaviour {
 
     void FastMovement()
     {
-        if (Input.GetKey(KeyCode.W))
-            moveY += +1f;
-        if (Input.GetKey(KeyCode.S))
-            moveY += -1f;
-        if (Input.GetKey(KeyCode.D))
-            moveX += +1f;
-        if (Input.GetKey(KeyCode.A))
-            moveX += -1f;
+        hyperTime = 0;
 
-        moveDir = new Vector2(moveX, moveY).normalized;
-        rb.AddForce(moveDir * force * Time.deltaTime);
+        if (Input.GetKey(KeyCode.W))
+        {
+            if (rb.velocity.y < -0.7)
+                moveY = +1;
+            else if (rb.velocity.y > 0.7)
+                moveY = +1 / Mathf.Pow(rb.velocity.y, 1);
+            else
+                moveY = 0.7f;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            if (rb.velocity.y < -0.7)
+                moveY = -1 / Mathf.Pow((-rb.velocity.y), 1);
+            else if (rb.velocity.y > 0.7)
+                moveY = -1;
+            else
+                moveY = -0.7f;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            if (rb.velocity.x < -0.7)
+                moveX = +1;
+            else if (rb.velocity.x > 0.7)
+                moveX = +1 / Mathf.Pow(rb.velocity.x, 1);
+            else
+                moveX = 0.7f;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            if (rb.velocity.x < -0.7)
+                moveX = -1 / Mathf.Pow((-rb.velocity.x), 1);
+            else if (rb.velocity.x > 0.7)
+                moveX = -1;
+            else
+                moveX = -0.7f;
+        }
+        moveDir = new Vector2(moveX, moveY);
+        rb.AddForce(moveDir * force * 37 * Time.deltaTime);
 
         if ((moveX == 0 && moveY == 0) && (Mathf.Abs(rb.velocity.x) >= 0.1 || Mathf.Abs(rb.velocity.x) <= -0.1 || Mathf.Abs(rb.velocity.y) >= 0.1 || Mathf.Abs(rb.velocity.y) <= -0.1))
             rb.drag = 2;
@@ -190,6 +223,7 @@ public class Player : MonoBehaviour {
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;
     }
+
     public void TakeDamage(int damage)
     {
         if (state == ShieldState.disabled)

@@ -53,7 +53,7 @@ public class GameHandler : MonoBehaviour
         shieldTime += Time.deltaTime;
         adrenalineTime += Time.deltaTime;
 
-        if (GameObject.Find("Enemy(Clone)") == null)
+        /*if (GameObject.Find("Enemy(Clone)") == null)
         {
             int positive = Random.Range(1, 3);
             if(positive == 1)
@@ -61,7 +61,7 @@ public class GameHandler : MonoBehaviour
             else
                 enemyspawnPos = new Vector2(Random.Range(mapSize, mapSize + 5), Random.Range(mapSize, mapSize + 5));
             Instantiate(enemyPrefab, enemyspawnPos, Quaternion.identity);
-        }
+        }*/
 
         Vector2 spawnPos;
         if (yellowTime >= yellowDelay)

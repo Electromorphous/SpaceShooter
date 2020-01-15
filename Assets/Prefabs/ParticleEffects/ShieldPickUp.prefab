@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5329139267980325960}
   - component: {fileID: 7271895039445456297}
   - component: {fileID: 8085933897832011635}
+  - component: {fileID: -7087922834221626531}
   m_Layer: 0
   m_Name: ShieldPickUp
   m_TagString: Untagged
@@ -4753,3 +4754,15 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-7087922834221626531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8115169749612782859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb9cf323ef72cea4fa3fe73c20460e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

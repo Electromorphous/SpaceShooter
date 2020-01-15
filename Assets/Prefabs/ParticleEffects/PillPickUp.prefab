@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 859330257492410373}
   - component: {fileID: 859330257492410372}
   - component: {fileID: 859330257492410371}
+  - component: {fileID: -7912438712944462879}
   m_Layer: 0
   m_Name: PillPickUp
   m_TagString: Untagged
@@ -4753,3 +4754,15 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-7912438712944462879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859330257492410370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb9cf323ef72cea4fa3fe73c20460e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
