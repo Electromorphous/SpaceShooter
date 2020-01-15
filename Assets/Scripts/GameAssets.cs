@@ -43,6 +43,23 @@ public class GameAssets : MonoBehaviour {
         float red = HexToFloatNormalized(hex.Substring(0, 2));
         float green = HexToFloatNormalized(hex.Substring(2, 2));
         float blue = HexToFloatNormalized(hex.Substring(4, 2));
-        return new Color(red, green, blue);
+        float alpha = 1f;
+        if(hex.Length >= 8)
+            alpha = HexToFloatNormalized(hex.Substring(6, 2));
+        
+        return new Color(red, green, blue, alpha);
+    }
+    public string GetHexFromColor(Color color, bool useAlpha)
+    {
+        string red = FloatNormalizedToHex(color.r);
+        string green = FloatNormalizedToHex(color.g);
+        string blue = FloatNormalizedToHex(color.b);
+        if(!useAlpha)
+            return red + green + blue;
+        else
+        {
+            string alpha = FloatNormalizedToHex(color.a);
+            return red + green + blue + alpha;
+        }
     }
 }

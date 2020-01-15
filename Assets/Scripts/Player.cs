@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
 
         hyper = false;
-        hyperTime = lastingHyperTime = 0;
+        hyperTime = lastingHyperTime = 1f;
     }
 
     void Update()

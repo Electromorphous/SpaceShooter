@@ -48,8 +48,9 @@ public class Pill : MonoBehaviour
         if (health > maxHealth)
             health = maxHealth;
         player.GetComponent<Player>().finalHealth = health;
-
+        //GameAssets.i.ChangeColor("00ff00");
         Instantiate(pickUp, transform.position, transform.rotation);
         Destroy(gameObject);
     }
+
 }
