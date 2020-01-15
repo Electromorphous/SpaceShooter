@@ -175,8 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6daee8a1b3752541b1494c220bb54dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastingTime: 222
-  lifeSpan: 10
+  lastingTime: 30
+  lifeSpan: 20
   pickUp: {fileID: 4283275457676086818, guid: 2dba4c21c94a11f4098dd028910b3fde, type: 3}
   vanish: {fileID: 3817907387638640555, guid: b644b185cb5472a4ab17e49b79482774, type: 3}
 --- !u!198 &8106739110695166130

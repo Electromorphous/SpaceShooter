@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
     float health, shield;
     public int maxHealth, maxShield;
     public GameObject damage, shieldSprite;
-    public Image healthBar, shieldBar;
+    public Image healthBar, shieldBar, hypedTimer;
     public Camera cam;
     Rigidbody2D rb;
     Vector2 mousePos;
@@ -34,14 +34,14 @@ public class Player : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
 
         hyper = false;
-        hyperTime = 0;
+        hyperTime = lastingHyperTime = 0;
     }
 
     void Update()
     {
         if (hyper == false)
             Movement();
-        else if (hyperTime <= lastingHyperTime && hyper == true)
+        else if (hyperTime < lastingHyperTime && hyper == true)
         {
             FastMovement();
             hyperTime += Time.deltaTime;
@@ -49,9 +49,11 @@ public class Player : MonoBehaviour {
 
         if (hyperTime > lastingHyperTime)
         {
-            hyperTime = 0;
+            hyperTime = lastingHyperTime;
             hyper = false;
         }
+
+        hypedTimer.fillAmount = (lastingHyperTime - hyperTime) / lastingHyperTime;
 
         HealthHandle();
         ShieldHandle();

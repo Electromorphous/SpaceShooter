@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shielding: 0.25
-  lifeSpan: 10
+  lifeSpan: 20
   pickUp: {fileID: 8115169749612782859, guid: e813c1364d6ae2a4485237dcfa8bcc18, type: 3}
   vanish: {fileID: 8242760340992817119, guid: 5eec5fe936d178340aec76dd0f8dd3e3, type: 3}
 --- !u!198 &7259432554184704087
