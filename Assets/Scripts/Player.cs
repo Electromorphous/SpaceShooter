@@ -25,8 +25,7 @@ public class Player : MonoBehaviour {
     { disabled, power1, power2, power3 }
     [HideInInspector] public ShieldState state;
 
-    float hyperTime;
-    [HideInInspector] public float lastingHyperTime;
+    [HideInInspector] public float hyperTime, lastingHyperTime;
 
     void Start()
     {
@@ -128,7 +127,6 @@ public class Player : MonoBehaviour {
 
     void Movement()
     {
-        rb.mass = 0.5f;
         
         if (Input.GetKey(KeyCode.W))
             moveY += 1f;
@@ -160,51 +158,23 @@ public class Player : MonoBehaviour {
 
     void FastMovement()
     {
-        hyperTime = 0;
 
         if (Input.GetKey(KeyCode.W))
-        {
-            if (rb.velocity.y < -0.7)
-                moveY = +1;
-            else if (rb.velocity.y > 0.7)
-                moveY = +1 / Mathf.Pow(rb.velocity.y, 1);
-            else
-                moveY = 0.7f;
-        }
+            moveY += 1f;
         if (Input.GetKey(KeyCode.S))
-        {
-            if (rb.velocity.y < -0.7)
-                moveY = -1 / Mathf.Pow((-rb.velocity.y), 1);
-            else if (rb.velocity.y > 0.7)
-                moveY = -1;
-            else
-                moveY = -0.7f;
-        }
+            moveY -= 1f;
         if (Input.GetKey(KeyCode.D))
-        {
-            if (rb.velocity.x < -0.7)
-                moveX = +1;
-            else if (rb.velocity.x > 0.7)
-                moveX = +1 / Mathf.Pow(rb.velocity.x, 1);
-            else
-                moveX = 0.7f;
-        }
+            moveX += 1f;
         if (Input.GetKey(KeyCode.A))
-        {
-            if (rb.velocity.x < -0.7)
-                moveX = -1 / Mathf.Pow((-rb.velocity.x), 1);
-            else if (rb.velocity.x > 0.7)
-                moveX = -1;
-            else
-                moveX = -0.7f;
-        }
-        moveDir = new Vector2(moveX, moveY);
-        rb.AddForce(moveDir * force * 37 * Time.deltaTime);
+            moveX -= 1f;
+
+        moveDir = new Vector2(moveX, moveY).normalized;
+        rb.AddForce(moveDir * force * 3 * Time.deltaTime);
 
         if ((moveX == 0 && moveY == 0) && (Mathf.Abs(rb.velocity.x) >= 0.1 || Mathf.Abs(rb.velocity.x) <= -0.1 || Mathf.Abs(rb.velocity.y) >= 0.1 || Mathf.Abs(rb.velocity.y) <= -0.1))
-            rb.drag = 2;
+            rb.drag = 5;
         else
-            rb.drag = 1;
+            rb.drag = 2;
 
         moveX = moveY = 0;
 
@@ -214,6 +184,7 @@ public class Player : MonoBehaviour {
         transform.position = pos;
 
         Look();
+
     }
 
     void Look()
