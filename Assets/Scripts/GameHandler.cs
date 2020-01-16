@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-    Vector2 enemyspawnPos;
+    public GameObject pairPrefab;
+    public float pairSpawnDelay;
+    float pairTime;
+    public GameObject hexPrefab;
+    public float hexSpawnDelay;
+    float hexTime;
+    public GameObject normPrefab;
+    public float normSpawnDelay;
+    float normTime;
+    public GameObject healerPrefab;
+    public float healerSpawnDelay;
+    float healerTime;
+    public GameObject predictorPrefab;
+    public float predictorSpawnDelay;
+    float predictorTime;
 
     public GameObject star1;
     public GameObject star2;
     public GameObject star3;
     int starCount;
     int mapSize;
-    Transform playerspawnPos;
+    Transform playerPos;
     public GameObject cursor;
     public Camera cam;
 
@@ -23,9 +36,8 @@ public class GameHandler : MonoBehaviour
 
     void Start()
     {
-        playerspawnPos = GameAssets.i.player.transform;
 
-        yellowTime = blueTime = greenTime = shieldTime = 0;
+        yellowTime = blueTime = greenTime = shieldTime = pairTime = hexTime = normTime = healerTime = predictorTime = 0;
 
         mapSize = GameAssets.i.mapSize;
         starCount = mapSize / 2;
@@ -46,6 +58,13 @@ public class GameHandler : MonoBehaviour
     {
         Vector2 target = cam.ScreenToWorldPoint(Input.mousePosition);
         cursor.transform.position = target;
+        playerPos = GameAssets.i.player.transform;
+
+        pairTime += Time.deltaTime;
+        hexTime += Time.deltaTime;
+        normTime += Time.deltaTime;
+        healerTime += Time.deltaTime;
+        predictorTime += Time.deltaTime;
 
         yellowTime += Time.deltaTime;
         blueTime += Time.deltaTime;
@@ -53,14 +72,40 @@ public class GameHandler : MonoBehaviour
         shieldTime += Time.deltaTime;
         adrenalineTime += Time.deltaTime;
 
-        if (GameObject.Find("Enemy(Clone)") == null)
+        if (pairTime >= pairSpawnDelay)
         {
-            int positive = Random.Range(1, 3);
-            if (positive == 1)
-                enemyspawnPos = new Vector2(Random.Range(-mapSize - 5, -mapSize), Random.Range(-mapSize - 5, -mapSize));
-            else
-                enemyspawnPos = new Vector2(Random.Range(mapSize, mapSize + 5), Random.Range(mapSize, mapSize + 5));
-            Instantiate(enemyPrefab, enemyspawnPos, Quaternion.identity);
+            Instantiate(pairPrefab, RandomSpawnEnemy(), Quaternion.identity);
+            Instantiate(pairPrefab, RandomSpawnEnemy(), Quaternion.identity);
+            pairTime -= pairSpawnDelay;
+        }
+
+        if (hexTime >= hexSpawnDelay)
+        {
+            Instantiate(hexPrefab, RandomSpawnEnemy(), Quaternion.identity);
+            Instantiate(hexPrefab, RandomSpawnEnemy(), Quaternion.identity);
+            Instantiate(hexPrefab, RandomSpawnEnemy(), Quaternion.identity);
+            Instantiate(hexPrefab, RandomSpawnEnemy(), Quaternion.identity);
+            Instantiate(hexPrefab, RandomSpawnEnemy(), Quaternion.identity);
+            Instantiate(hexPrefab, RandomSpawnEnemy(), Quaternion.identity);
+            hexTime -= hexSpawnDelay;
+        }
+
+        if (normTime >= normSpawnDelay)
+        {
+            Instantiate(normPrefab, RandomSpawnEnemy(), Quaternion.identity);
+            normTime -= normSpawnDelay;
+        }
+
+        if (healerTime >= healerSpawnDelay)
+        {
+            Instantiate(healerPrefab, RandomSpawnEnemy(), Quaternion.identity);
+            healerTime -= healerSpawnDelay;
+        }
+
+        if (predictorTime >= predictorSpawnDelay)
+        {
+            Instantiate(predictorPrefab, RandomSpawnEnemy(), Quaternion.identity);
+            predictorTime -= predictorSpawnDelay;
         }
 
         Vector2 spawnPos;
@@ -68,8 +113,8 @@ public class GameHandler : MonoBehaviour
         {
             do
             {
-                spawnPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
-            } while (Vector2.Distance(spawnPos, playerspawnPos.position) <= 0.7f);
+                spawnPos = RandomSpawnPower();
+            } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
 
             Instantiate(pillSpawn, spawnPos, Quaternion.identity);
             Instantiate(yellowPillPrefab, spawnPos, Quaternion.identity);
@@ -80,8 +125,8 @@ public class GameHandler : MonoBehaviour
         {
             do
             {
-                spawnPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
-            } while (Vector2.Distance(spawnPos, playerspawnPos.position) <= 0.7f);
+                spawnPos = RandomSpawnPower();
+            } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
 
             Instantiate(pillSpawn, spawnPos, Quaternion.identity);
             Instantiate(bluePillPrefab, spawnPos, Quaternion.identity);
@@ -92,8 +137,8 @@ public class GameHandler : MonoBehaviour
         {
             do
             {
-                spawnPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
-            } while (Vector2.Distance(spawnPos, playerspawnPos.position) <= 0.7f);
+                spawnPos = RandomSpawnPower();
+            } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
 
             Instantiate(pillSpawn, spawnPos, Quaternion.identity);
             Instantiate(greenPillPrefab, spawnPos, Quaternion.identity);
@@ -104,8 +149,8 @@ public class GameHandler : MonoBehaviour
         {
             do
             {
-                spawnPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
-            } while (Vector2.Distance(spawnPos, playerspawnPos.position) <= 0.7f);
+                spawnPos = RandomSpawnPower();
+            } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
 
             Instantiate(shieldSpawn, spawnPos, Quaternion.identity);
             Instantiate(shieldPrefab, spawnPos, Quaternion.identity);
@@ -116,8 +161,8 @@ public class GameHandler : MonoBehaviour
         {
             do
             {
-                spawnPos = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
-            } while (Vector2.Distance(spawnPos, playerspawnPos.position) <= 0.7f);
+                spawnPos = RandomSpawnPower();
+            } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
 
             Instantiate(adrenalineSpawn, spawnPos, Quaternion.identity);
             Instantiate(adrenalinePrefab, spawnPos, Quaternion.identity);
@@ -125,4 +170,23 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    Vector2 RandomSpawnEnemy()
+    {
+        Vector2 spawnPos;
+        int dir = Random.Range(1,5);
+        if (dir == 1)
+            spawnPos = new Vector2(Random.Range(-mapSize - 5, -mapSize), Random.Range(-mapSize - 5, mapSize + 5));
+        else if (dir == 2)
+            spawnPos = new Vector2(Random.Range(-mapSize - 5, mapSize + 5), Random.Range(mapSize, mapSize + 5));
+        else if (dir == 3)
+            spawnPos = new Vector2(Random.Range(mapSize, mapSize + 5), Random.Range(-mapSize - 5, mapSize + 5));
+        else
+            spawnPos = new Vector2(Random.Range(-mapSize - 5, mapSize + 5), Random.Range(-mapSize - 5, -mapSize));
+
+        return spawnPos;
+    }
+    Vector2 RandomSpawnPower()
+    {
+        return new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
+    }
 }

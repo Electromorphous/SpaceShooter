@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Effects : MonoBehaviour
+public class Destroy : MonoBehaviour
 {
     float time;
 

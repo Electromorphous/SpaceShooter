@@ -132,11 +132,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e829f9109f326e4698deae264165f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -42
+  speed: -57
   rb: {fileID: 2589129185009016208}
   hitPrefab: {fileID: 6133189289442510745, guid: 110a1ba211490e544bfe674794bb0943,
     type: 3}
   damage: 15
   laserLife: 1
-  gun: {fileID: 3001954245073768712, guid: e44e616159ec9e746953749550675f57, type: 3}
-  laserName: Enemy
+  goThrough: Enemy

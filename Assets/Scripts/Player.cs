@@ -40,10 +40,10 @@ public class Player : MonoBehaviour {
     void Update()
     {
         if (hyper == false)
-            Movement();
+            Movement(1, 2, 1);
         else if (hyperTime < lastingHyperTime && hyper == true)
         {
-            FastMovement();
+            Movement(3, 5, 2);
             hyperTime += Time.deltaTime;
         }
 
@@ -127,7 +127,7 @@ public class Player : MonoBehaviour {
             Die();
     }
 
-    void Movement()
+    void Movement(float forceMultiplier, float stoppingDrag, float movingDrag)
     {
         
         if (Input.GetKey(KeyCode.W))
@@ -140,43 +140,12 @@ public class Player : MonoBehaviour {
             moveX -= 1f;
 
         moveDir = new Vector2(moveX, moveY).normalized;
-        rb.AddForce(moveDir * force * Time.deltaTime);
+        rb.AddForce(moveDir * force * forceMultiplier * Time.deltaTime);
 
         if ((moveX == 0 && moveY == 0) && (Mathf.Abs(rb.velocity.x) >= 0.1 || Mathf.Abs(rb.velocity.x) <= -0.1 || Mathf.Abs(rb.velocity.y) >= 0.1 || Mathf.Abs(rb.velocity.y) <= -0.1))
-            rb.drag = 2;
+            rb.drag = stoppingDrag;
         else
-            rb.drag = 1;
-
-        moveX = moveY = 0;
-
-        pos = transform.position;
-        pos.x = Mathf.Clamp(pos.x, -mapSize, mapSize);
-        pos.y = Mathf.Clamp(pos.y, -mapSize, mapSize);
-        transform.position = pos;
-
-        Look();
-
-    }
-
-    void FastMovement()
-    {
-
-        if (Input.GetKey(KeyCode.W))
-            moveY += 1f;
-        if (Input.GetKey(KeyCode.S))
-            moveY -= 1f;
-        if (Input.GetKey(KeyCode.D))
-            moveX += 1f;
-        if (Input.GetKey(KeyCode.A))
-            moveX -= 1f;
-
-        moveDir = new Vector2(moveX, moveY).normalized;
-        rb.AddForce(moveDir * force * 3 * Time.deltaTime);
-
-        if ((moveX == 0 && moveY == 0) && (Mathf.Abs(rb.velocity.x) >= 0.1 || Mathf.Abs(rb.velocity.x) <= -0.1 || Mathf.Abs(rb.velocity.y) >= 0.1 || Mathf.Abs(rb.velocity.y) <= -0.1))
-            rb.drag = 5;
-        else
-            rb.drag = 2;
+            rb.drag = movingDrag;
 
         moveX = moveY = 0;
 

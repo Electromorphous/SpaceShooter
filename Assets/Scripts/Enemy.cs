@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     GameObject target;
     public int attackRange;
     public GameObject enemyGun;
+    public bool predictor;
+    public float laserSpeed;
 
     void Start()
     {
@@ -36,9 +38,10 @@ public class Enemy : MonoBehaviour
             enemyGun.GetComponent<EnemyGun>().shoot = true;
         }
 
-        Vector2 lookDir = target.transform.position - transform.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;
-        rb.rotation = angle;
+        if (!predictor)
+            Look();
+        else
+            PredictLook();
 
         healthBar.fillAmount = health / maxHealth;
     }
@@ -63,7 +66,23 @@ public class Enemy : MonoBehaviour
             rb.drag = 1;
 
         moveX = moveY = 0;
+    
+    }
 
+    void Look()
+    {
+        Vector2 lookDir = target.transform.position - transform.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;
+        rb.rotation = angle;
+    }
+
+    void PredictLook()
+    {
+        Vector2 initialPos = target.transform.position;
+        Vector3 finalPos = initialPos + (target.GetComponent<Rigidbody2D>().velocity) * (Vector2.Distance(transform.position, initialPos)) / laserSpeed;
+        Vector2 lookDir = finalPos - transform.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;
+        rb.rotation = angle;
     }
 
     public void TakeDamage(int damage)

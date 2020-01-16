@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4662813217839195430}
   - component: {fileID: 1013214749265344783}
   - component: {fileID: 6260820910963465373}
-  - component: {fileID: -1028282792610885619}
+  - component: {fileID: 606676321610847472}
   m_Layer: 0
   m_Name: AdrenalinePickUp
   m_TagString: Untagged
@@ -4754,7 +4754,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &-1028282792610885619
+--- !u!114 &606676321610847472
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

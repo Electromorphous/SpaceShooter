@@ -7,6 +7,8 @@ public class PlayerGun : MonoBehaviour
 
     public Transform gun;
     public GameObject laserPrefab;
+    public int damage;
+    
     void Update()
     {
         if(Input.GetButtonDown("Fire1"))
@@ -17,8 +19,7 @@ public class PlayerGun : MonoBehaviour
     }
     public void shootLaser(){
 
-        Instantiate(laserPrefab, gun.position, gun.rotation);
-        
-        
+        GameObject laser = Instantiate(laserPrefab, gun.position, gun.rotation);
+        laser.GetComponent<Laser>().damage = damage;        
     }
 }

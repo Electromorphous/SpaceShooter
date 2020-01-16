@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyGun : MonoBehaviour
 {
-    public Transform gun;
     public GameObject laserPrefab;
     float time;
     public float shootDelay;
     [HideInInspector] public bool shoot = false;
+    public int damage;
 
     void Update()
     {
@@ -24,7 +24,7 @@ public class EnemyGun : MonoBehaviour
     public void shootLaser()
     {
 
-        Instantiate(laserPrefab, gun.position, gun.rotation);
-
+        GameObject laser = Instantiate(laserPrefab, transform.position, transform.rotation);
+        laser.GetComponent<Laser>().damage = damage;
     }
 }
