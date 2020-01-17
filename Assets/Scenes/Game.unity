@@ -252,19 +252,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pairPrefab: {fileID: 1268719867645500997, guid: 1f39cfbcd1f907142b92a7ddec92eb5b,
     type: 3}
-  pairSpawnDelay: 111
+  pairSpawnDelay: 5
   hexPrefab: {fileID: 1268719867645500997, guid: 2862c963ca84fab4d81f91d80f3adf69,
     type: 3}
-  hexSpawnDelay: 111
+  hexSpawnDelay: 10
   normPrefab: {fileID: 1268719867645500997, guid: a405e58798c36f14fb71057af36012e5,
     type: 3}
-  normSpawnDelay: 5
+  normSpawnDelay: 10
   healerPrefab: {fileID: 1268719867645500997, guid: e11f4e84afd12d3468d6381af4a1c361,
     type: 3}
-  healerSpawnDelay: 111
+  healerSpawnDelay: 15
   predictorPrefab: {fileID: 1268719867645500997, guid: 90294ee43d82b6b47a8e5413582b9624,
     type: 3}
-  predictorSpawnDelay: 5
+  predictorSpawnDelay: 15
   star1: {fileID: 7911873045673393092, guid: d0662fa557e5f6d4da171da380e88eb3, type: 3}
   star2: {fileID: 5394904047500292640, guid: b25bd52fb48849d47985a883ab57284d, type: 3}
   star3: {fileID: 9012158703702470315, guid: bfd19b95d81c6cf4b8693e8740ee0232, type: 3}
@@ -384,6 +384,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapSize: 42
+  laserSpeed: 57
+  enemyRepelRange: 88
   damage1: {fileID: 21300000, guid: 1f8326808ab5dab428601ab1f7629f4a, type: 3}
   damage2: {fileID: 21300000, guid: a56755077c0f5ac41b8feffe54ef4931, type: 3}
   damage3: {fileID: 21300000, guid: 115a00783efd33f47ae1022cef663cc4, type: 3}
@@ -879,9 +881,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 2091923859
+  m_SortingLayer: 4
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 29115be6fbb40a94997c987ee810e4b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

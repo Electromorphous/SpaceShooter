@@ -72,21 +72,24 @@ public class GameHandler : MonoBehaviour
         shieldTime += Time.deltaTime;
         adrenalineTime += Time.deltaTime;
 
+        Vector2 spawnPos;
         if (pairTime >= pairSpawnDelay)
         {
-            Instantiate(pairPrefab, RandomSpawnEnemy(), Quaternion.identity);
-            Instantiate(pairPrefab, RandomSpawnEnemy(), Quaternion.identity);
+            spawnPos = RandomSpawnEnemy();
+            Instantiate(pairPrefab, spawnPos, Quaternion.identity);
+            Instantiate(pairPrefab, spawnPos, Quaternion.identity);
             pairTime -= pairSpawnDelay;
         }
 
         if (hexTime >= hexSpawnDelay)
         {
-            Instantiate(hexPrefab, RandomSpawnEnemy(), Quaternion.identity);
-            Instantiate(hexPrefab, RandomSpawnEnemy(), Quaternion.identity);
-            Instantiate(hexPrefab, RandomSpawnEnemy(), Quaternion.identity);
-            Instantiate(hexPrefab, RandomSpawnEnemy(), Quaternion.identity);
-            Instantiate(hexPrefab, RandomSpawnEnemy(), Quaternion.identity);
-            Instantiate(hexPrefab, RandomSpawnEnemy(), Quaternion.identity);
+            spawnPos = RandomSpawnEnemy();
+            Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+            Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+            Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+            Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+            Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+            Instantiate(hexPrefab, spawnPos, Quaternion.identity);
             hexTime -= hexSpawnDelay;
         }
 
@@ -108,7 +111,6 @@ public class GameHandler : MonoBehaviour
             predictorTime -= predictorSpawnDelay;
         }
 
-        Vector2 spawnPos;
         if (yellowTime >= yellowDelay)
         {
             do

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    public float speed;
+    float speed;
+    public int dir;
     float time = 0;
     public GameObject hitPrefab;
     [HideInInspector] public int damage;
@@ -13,6 +14,7 @@ public class Laser : MonoBehaviour
 
     void Start()
     {
+        speed = dir * GameAssets.i.laserSpeed;
         GetComponent<Rigidbody2D>().velocity = transform.up * speed;
     }
 

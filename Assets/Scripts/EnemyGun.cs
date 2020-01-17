@@ -12,7 +12,6 @@ public class EnemyGun : MonoBehaviour
 
     void Update()
     {
-
         time += Time.deltaTime;
         
         if (time >= shootDelay && shoot == true)

@@ -132,8 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e829f9109f326e4698deae264165f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 57
-  rb: {fileID: 2589129185009016208}
+  dir: 1
   hitPrefab: {fileID: 6722453012791575349, guid: ae8df38ca35d5514d916c1193d4bf67f,
     type: 3}
   damage: 20

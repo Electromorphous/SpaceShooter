@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5859111903116913805}
   - component: {fileID: 7638762570587557614}
   - component: {fileID: 8240060174321683714}
+  - component: {fileID: -2284500048509580981}
+  - component: {fileID: 574856017685900644}
   m_Layer: 0
   m_Name: HexBros
   m_TagString: Enemy
@@ -123,6 +125,7 @@ MonoBehaviour:
   healthBar: {fileID: 7418719267628566310}
   attackRange: 6
   enemyGun: {fileID: 2895603200518949009}
+  predictor: 0
 --- !u!60 &8240060174321683714
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -175,6 +178,42 @@ PolygonCollider2D:
       - {x: -0.074999996, y: -0.38}
       - {x: 0.125, y: -0.19}
       - {x: 0.145, y: -0.16}
+--- !u!250 &-2284500048509580981
+PointEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268719867645500997}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceMagnitude: 13
+  m_ForceVariation: 0
+  m_DistanceScale: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
+  m_ForceMode: 0
+  m_Drag: 0
+  m_AngularDrag: 0
+--- !u!58 &574856017685900644
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268719867645500997}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.7
 --- !u!1 &2057446610525400347
 GameObject:
   m_ObjectHideFlags: 0

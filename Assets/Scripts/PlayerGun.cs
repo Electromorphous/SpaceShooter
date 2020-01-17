@@ -11,7 +11,7 @@ public class PlayerGun : MonoBehaviour
     
     void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButton("Fire1"))
         {
             shootLaser();
             

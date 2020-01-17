@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5859111903116913805}
   - component: {fileID: 7638762570587557614}
   - component: {fileID: 5062575655087269087}
+  - component: {fileID: -3294219405553945612}
+  - component: {fileID: 6211482469807144875}
   m_Layer: 0
   m_Name: Healer
   m_TagString: Enemy
@@ -123,6 +125,7 @@ MonoBehaviour:
   healthBar: {fileID: 7418719267628566310}
   attackRange: 6
   enemyGun: {fileID: 2895603200518949009}
+  predictor: 0
 --- !u!60 &5062575655087269087
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -160,6 +163,42 @@ PolygonCollider2D:
       - {x: 0.41, y: -0.22999999}
       - {x: 0.41, y: 0.31}
       - {x: 0.28, y: 0.42}
+--- !u!250 &-3294219405553945612
+PointEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268719867645500997}
+  m_Enabled: 1
+  m_UseColliderMask: 0
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceMagnitude: 13
+  m_ForceVariation: 0
+  m_DistanceScale: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
+  m_ForceMode: 0
+  m_Drag: 0
+  m_AngularDrag: 0
+--- !u!58 &6211482469807144875
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268719867645500997}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.7
 --- !u!1 &2057446610525400347
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-
     Rigidbody2D rb;
     public float force;
     float moveX, moveY;
@@ -16,13 +15,16 @@ public class Enemy : MonoBehaviour
     public int attackRange;
     public GameObject enemyGun;
     public bool predictor;
-    public float laserSpeed;
+    float laserSpeed;
+    float repelRange;
 
     void Start()
     {
         health = maxHealth;
         target = GameAssets.i.player;
         rb = GetComponent<Rigidbody2D>();
+        laserSpeed = GameAssets.i.laserSpeed;
+        repelRange = GameAssets.i.enemyRepelRange;
     }
 
     void Update()
@@ -34,10 +36,10 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector2(0, 0);
+            rb.drag = 3;
             enemyGun.GetComponent<EnemyGun>().shoot = true;
         }
-
+        
         if (!predictor)
             Look();
         else
