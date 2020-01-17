@@ -35,11 +35,18 @@ public class Laser : MonoBehaviour
         if(hitInfo.CompareTag("Enemy"))
         {
             Enemy enemy = hitInfo.GetComponent<Enemy>();
-            enemy.TakeDamage(damage);
+            if (enemy)
+                enemy.TakeDamage(damage);
+            else
+            {
+                EnemyHealer enemyHealer= hitInfo.GetComponent<EnemyHealer>();
+                enemyHealer.TakeDamage(damage);
+            }
+
         }
         if(hitInfo.CompareTag("Player"))
         {
-            Player player = GameAssets.i.player.GetComponent<Player>();
+            Player player = hitInfo.GetComponent<Player>();
             player.TakeDamage(damage);
         }
         Destroy(gameObject);

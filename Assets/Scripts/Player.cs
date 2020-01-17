@@ -125,6 +125,8 @@ public class Player : MonoBehaviour {
 
         if (health <= 0)
             Die();
+        else if (finalHealth > maxHealth)
+            finalHealth = maxHealth;
     }
 
     void Movement(float forceMultiplier, float stoppingDrag, float movingDrag)

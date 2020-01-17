@@ -95,6 +95,10 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
+        else if(health > maxHealth)
+        {
+            health = maxHealth;
+        }
     }
 
     void Die()

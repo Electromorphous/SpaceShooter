@@ -138,3 +138,4 @@ MonoBehaviour:
   damage: 15
   laserLife: 1
   goThrough: Player
+  healingLaser: 1

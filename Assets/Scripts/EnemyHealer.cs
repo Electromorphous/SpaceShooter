@@ -29,21 +29,24 @@ public class EnemyHealer : MonoBehaviour
 
         if (target == null || target.GetComponent<Enemy>() == null || target.GetComponent<Enemy>().health == target.GetComponent<Enemy>().maxHealth)
             target = GetClosestObject("Enemy");
-        
-        if (Vector3.Distance(transform.position, target.transform.position) > healRange)
-        {
-            Movement();
-            enemyGun.GetComponent<EnemyGun>().shoot = false;
-        }
-        else
-        {
-            rb.drag = 3;
-            enemyGun.GetComponent<EnemyGun>().shoot = true;
-        }
 
-        PredictLook();
+        if (target)
+        {
+            if (Vector3.Distance(transform.position, target.transform.position) > healRange)
+            {
+                Movement();
+                enemyGun.GetComponent<EnemyGun>().shoot = false;
+            }
+            else
+            {
+                rb.drag = 3;
+                enemyGun.GetComponent<EnemyGun>().shoot = true;
+            }
 
-        healthBar.fillAmount = health / maxHealth;
+            PredictLook();
+
+            healthBar.fillAmount = health / maxHealth;
+        }
     }
 
     GameObject GetClosestObject(string tagName)
