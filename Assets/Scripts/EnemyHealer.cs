@@ -3,31 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public class EnemyHealer : MonoBehaviour
 {
     Rigidbody2D rb;
     public float force;
     float moveX, moveY;
-    [HideInInspector] public float health;
+    float health;
     public float maxHealth;
     public Image healthBar;
-    GameObject target;
-    public int attackRange;
+    GameObject target = null;
+    public float healRange;
     public GameObject enemyGun;
-    public bool predictor;
     float laserSpeed;
 
     void Start()
     {
         health = maxHealth;
-        target = GameAssets.i.player;
         rb = GetComponent<Rigidbody2D>();
         laserSpeed = GameAssets.i.laserSpeed;
+        Debug.Log("Spawned");
     }
 
     void Update()
     {
-        if (Vector3.Distance(transform.position, target.transform.position) > attackRange)
+
+        if (target == null || target.GetComponent<Enemy>() == null || target.GetComponent<Enemy>().health == target.GetComponent<Enemy>().maxHealth)
+            target = GetClosestObject("Enemy");
+        
+        if (Vector3.Distance(transform.position, target.transform.position) > healRange)
         {
             Movement();
             enemyGun.GetComponent<EnemyGun>().shoot = false;
@@ -37,14 +40,32 @@ public class Enemy : MonoBehaviour
             rb.drag = 3;
             enemyGun.GetComponent<EnemyGun>().shoot = true;
         }
-        
-        if (!predictor)
-            Look();
-        else
-            PredictLook();
+
+        PredictLook();
 
         healthBar.fillAmount = health / maxHealth;
     }
+
+    GameObject GetClosestObject(string tagName)
+    {
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag(tagName);
+        GameObject bestTarget = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (GameObject potentialTarget in objectsWithTag)
+        {
+            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr && potentialTarget != gameObject)
+            {
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = potentialTarget;
+            }
+        }
+
+        return bestTarget;
+    }
+
 
     void Movement()
     {
@@ -66,14 +87,7 @@ public class Enemy : MonoBehaviour
             rb.drag = 1;
 
         moveX = moveY = 0;
-    
-    }
 
-    void Look()
-    {
-        Vector2 lookDir = target.transform.position - transform.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;
-        rb.rotation = angle;
     }
 
     void PredictLook()

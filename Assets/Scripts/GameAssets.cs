@@ -11,7 +11,6 @@ public class GameAssets : MonoBehaviour {
 
     public int mapSize;
     public float laserSpeed;
-    public float enemyRepelRange;
     public Sprite damage1, damage2, damage3;
     public Sprite shield1, shield2, shield3;
     public Transform damagePopupPrefab;
