@@ -21,15 +21,12 @@ public class EnemyHealer : MonoBehaviour
         health = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         laserSpeed = GameAssets.i.laserSpeed;
-        Debug.Log("Spawned");
     }
 
     void Update()
     {
-
-        if (target == null || target.GetComponent<Enemy>() == null || target.GetComponent<Enemy>().health == target.GetComponent<Enemy>().maxHealth)
-            target = GetClosestObject("Enemy");
-
+        
+        target = GetClosestObject("Enemy");
         if (target)
         {
             if (Vector3.Distance(transform.position, target.transform.position) > healRange)
@@ -45,8 +42,14 @@ public class EnemyHealer : MonoBehaviour
 
             PredictLook();
 
-            healthBar.fillAmount = health / maxHealth;
         }
+
+        if(!target)
+            enemyGun.GetComponent<EnemyGun>().shoot = false;
+
+
+        healthBar.fillAmount = health / maxHealth;
+
     }
 
     GameObject GetClosestObject(string tagName)
@@ -59,13 +62,17 @@ public class EnemyHealer : MonoBehaviour
         {
             Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr && potentialTarget != gameObject)
+            Enemy enemy = potentialTarget.GetComponent<Enemy>();
+            EnemyHealer enemyHealer = potentialTarget.GetComponent<EnemyHealer>();
+            if ((potentialTarget != gameObject) && (enemy && enemy.health < enemy.maxHealth || enemyHealer && enemyHealer.health < enemyHealer.maxHealth))
             {
-                closestDistanceSqr = dSqrToTarget;
-                bestTarget = potentialTarget;
+                if (dSqrToTarget < closestDistanceSqr)
+                {
+                    closestDistanceSqr = dSqrToTarget;
+                    bestTarget = potentialTarget;
+                }
             }
         }
-
         return bestTarget;
     }
 
@@ -111,6 +118,10 @@ public class EnemyHealer : MonoBehaviour
         if (health <= 0)
         {
             Die();
+        }
+        else if (health > maxHealth)
+        {
+            health = maxHealth;
         }
     }
 

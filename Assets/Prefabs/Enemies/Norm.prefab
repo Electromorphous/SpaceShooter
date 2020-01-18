@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 500
+  health: 0
   maxHealth: 120
   healthBar: {fileID: 7418719267628566310}
   attackRange: 10
