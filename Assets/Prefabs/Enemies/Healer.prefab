@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 6928329381172924663}
   - component: {fileID: 705079299007174953}
   - component: {fileID: 5859111903116913805}
-  - component: {fileID: 8240060174321683714}
+  - component: {fileID: 4253913299543521160}
+  - component: {fileID: 4025790626926379161}
   - component: {fileID: -2284500048509580981}
   - component: {fileID: 574856017685900644}
-  - component: {fileID: 4253913299543521160}
   m_Layer: 0
   m_Name: Healer
   m_TagString: Enemy
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: -1734768475
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2f8248d885bfb8042931669aff3d13d2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8ba946a6a8be91e45803979f1ff2083e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -108,7 +108,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &8240060174321683714
+--- !u!114 &4253913299543521160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268719867645500997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c33e26ddee46a4da527ab9b262de5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 416
+  maxHealth: 80
+  healthBar: {fileID: 7418719267628566310}
+  healRange: 15
+  enemyGun: {fileID: 2895603200518949009}
+--- !u!60 &4025790626926379161
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,7 +142,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.93, y: 0.84}
+    oldSize: {x: 0.82, y: 0.84}
     newSize: {x: 1.04, y: 0.84}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -133,33 +150,18 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.155, y: -0.12}
-      - {x: 0.155, y: -0.14}
-      - {x: 0.145, y: -0.14999999}
-      - {x: 0.13499999, y: -0.21}
-      - {x: 0.105, y: -0.24}
-      - {x: 0.085, y: -0.38}
-      - {x: 0.145, y: -0.41}
-      - {x: 0.175, y: -0.42}
-      - {x: 0.275, y: -0.42}
-      - {x: 0.33499998, y: -0.29}
-      - {x: 0.465, y: 0.089999996}
-      - {x: 0.465, y: 0.21}
-      - {x: 0.33499998, y: 0.39999998}
-      - {x: 0.325, y: 0.42}
-      - {x: 0.225, y: 0.42}
-      - {x: 0.095, y: 0.38}
-      - {x: 0.074999996, y: 0.34}
-      - {x: -0.21499999, y: 0.42}
-      - {x: -0.33499998, y: 0.42}
-      - {x: -0.465, y: 0.22}
-      - {x: -0.465, y: 0.03}
-      - {x: -0.285, y: -0.42}
-      - {x: -0.16499999, y: -0.42}
-      - {x: -0.13499999, y: -0.41}
-      - {x: -0.074999996, y: -0.38}
-      - {x: 0.125, y: -0.19}
-      - {x: 0.145, y: -0.16}
+    - - {x: 0.049999997, y: 0.42}
+      - {x: 0.049999997, y: 0.41}
+      - {x: 0, y: 0.42}
+      - {x: -0.24, y: 0.42}
+      - {x: -0.39, y: 0.38}
+      - {x: -0.41, y: 0.32999998}
+      - {x: -0.41, y: -0.35}
+      - {x: -0.21, y: -0.42}
+      - {x: 0.26999998, y: -0.42}
+      - {x: 0.41, y: -0.22999999}
+      - {x: 0.41, y: 0.31}
+      - {x: 0.28, y: 0.42}
 --- !u!250 &-2284500048509580981
 PointEffector2D:
   m_ObjectHideFlags: 0
@@ -168,16 +170,16 @@ PointEffector2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268719867645500997}
   m_Enabled: 1
-  m_UseColliderMask: 0
+  m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_ForceMagnitude: 13
   m_ForceVariation: 0
   m_DistanceScale: 1
   m_ForceSource: 0
   m_ForceTarget: 0
-  m_ForceMode: 0
+  m_ForceMode: 2
   m_Drag: 0
   m_AngularDrag: 0
 --- !u!58 &574856017685900644
@@ -196,23 +198,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.7
---- !u!114 &4253913299543521160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1268719867645500997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65c33e26ddee46a4da527ab9b262de5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 416
-  maxHealth: 888
-  healthBar: {fileID: 7418719267628566310}
-  healRange: 15
-  enemyGun: {fileID: 2895603200518949009}
 --- !u!1 &2057446610525400347
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,7 +396,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2895603200518949009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.29, z: 0}
+  m_LocalPosition: {x: 0, y: -0.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6928329381172924663}

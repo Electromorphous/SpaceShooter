@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 833
+  health: 0
   maxHealth: 60
   healthBar: {fileID: 7418719267628566310}
   attackRange: 6
@@ -186,16 +187,16 @@ PointEffector2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268719867645500997}
   m_Enabled: 1
-  m_UseColliderMask: 0
+  m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_ForceMagnitude: 13
   m_ForceVariation: 0
   m_DistanceScale: 1
   m_ForceSource: 0
   m_ForceTarget: 0
-  m_ForceMode: 0
+  m_ForceMode: 2
   m_Drag: 0
   m_AngularDrag: 0
 --- !u!58 &574856017685900644

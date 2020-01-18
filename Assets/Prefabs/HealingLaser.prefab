@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2589129185009016208}
   - component: {fileID: 7909626602678594702}
   - component: {fileID: -8612941451223518781}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HealingLaser
   m_TagString: Laser
   m_Icon: {fileID: 0}
@@ -95,9 +95,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dir: -1
-  hitPrefab: {fileID: 6722453012791575349, guid: ae8df38ca35d5514d916c1193d4bf67f,
+  hitPrefab: {fileID: 6722453012791575349, guid: c8e76cebe72962a4cbbc5c84af8f11fd,
     type: 3}
   damage: 15
   laserLife: 1
