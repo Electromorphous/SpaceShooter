@@ -15,12 +15,14 @@ public class EnemyHealer : MonoBehaviour
     public float healRange;
     public GameObject enemyGun;
     float laserSpeed;
+    GameObject player;
 
     void Start()
     {
         health = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         laserSpeed = GameAssets.i.laserSpeed;
+        player = GameAssets.i.player;
     }
 
     void Update()
@@ -41,12 +43,20 @@ public class EnemyHealer : MonoBehaviour
             }
 
             PredictLook();
-
         }
-
-        if(!target)
+        
+        if (!target)
+        {
             enemyGun.GetComponent<EnemyGun>().shoot = false;
+            Vector2 lookDir = player.transform.position - transform.position;
+            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;
+            rb.rotation = angle + 180;
 
+            if (Vector2.Distance(transform.position, player.transform.position) <= 11f)
+            {
+                rb.AddForce((transform.position - player.transform.position) * force * Time.deltaTime);
+            }
+        }
 
         healthBar.fillAmount = health / maxHealth;
 
