@@ -16,6 +16,7 @@ public class EnemyHealer : MonoBehaviour
     public GameObject enemyGun;
     float laserSpeed;
     GameObject player;
+    public GameObject enemyDeath;
 
     void Start()
     {
@@ -45,7 +46,7 @@ public class EnemyHealer : MonoBehaviour
             PredictLook();
         }
         
-        if (!target)
+        if (!target && player)
         {
             enemyGun.GetComponent<EnemyGun>().shoot = false;
             Vector2 lookDir = player.transform.position - transform.position;
@@ -137,6 +138,8 @@ public class EnemyHealer : MonoBehaviour
 
     void Die()
     {
+        Instantiate(enemyDeath, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        FindObjectOfType<AudioManager>().Play("EnemyDeath");
     }
 }

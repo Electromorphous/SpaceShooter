@@ -127,6 +127,8 @@ MonoBehaviour:
   attackRange: 12
   enemyGun: {fileID: 2895603200518949009}
   predictor: 1
+  enemyDeath: {fileID: 6159322876686328272, guid: bb98a0396f1ef5949884b76fb2588502,
+    type: 3}
 --- !u!60 &6470369455042781293
 PolygonCollider2D:
   m_ObjectHideFlags: 0

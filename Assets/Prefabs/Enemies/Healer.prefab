@@ -125,6 +125,8 @@ MonoBehaviour:
   healthBar: {fileID: 7418719267628566310}
   healRange: 15
   enemyGun: {fileID: 2895603200518949009}
+  enemyDeath: {fileID: 6159322876686328272, guid: bb98a0396f1ef5949884b76fb2588502,
+    type: 3}
 --- !u!60 &4025790626926379161
 PolygonCollider2D:
   m_ObjectHideFlags: 0

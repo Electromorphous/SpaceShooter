@@ -194,7 +194,7 @@ public class Player : MonoBehaviour {
     {
         Instantiate(playerDeath, transform.position, Quaternion.identity);
         Destroy(gameObject);
-        FindObjectOfType<AudioManager>().Play("DeathExplode");
+        FindObjectOfType<AudioManager>().Play("PlayerDeath");
     }
 
 }

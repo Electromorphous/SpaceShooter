@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     public GameObject enemyGun;
     public bool predictor;
     float laserSpeed;
+    public GameObject enemyDeath;
 
     void Start()
     {
@@ -106,6 +107,8 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        Instantiate(enemyDeath, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        FindObjectOfType<AudioManager>().Play("EnemyDeath");
     }
 }
