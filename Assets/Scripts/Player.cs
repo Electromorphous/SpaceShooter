@@ -19,6 +19,7 @@ public class Player : MonoBehaviour {
     Vector2 mousePos;
     Vector2 moveDir;
     Vector2 pos;
+    public GameObject playerDeath;
 
     [HideInInspector] public bool hyper;
 
@@ -195,8 +196,9 @@ public class Player : MonoBehaviour {
 
     void Die()
     {
+        Instantiate(playerDeath, transform.position, Quaternion.identity);
         Destroy(gameObject);
-        
+        FindObjectOfType<AudioManager>().Play("DeathExplode");
     }
 
 }
