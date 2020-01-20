@@ -23,8 +23,18 @@ public class DamagePopup : MonoBehaviour
 
     public void Setup(int damage)
     {
-        textMesh.SetText(damage.ToString());
-        textColor = textMesh.color;
+
+        if (damage > 0)
+        {
+            textColor = textMesh.color;
+            textMesh.SetText(damage.ToString());
+        }
+        else
+        {
+            textColor = Color.green;
+            damage = -damage;
+            textMesh.SetText(damage.ToString());
+        }
         vanishTimeMax = 0.1f;
         vanishTime = vanishTimeMax;
         speed = new Vector3(5f, 5f, 0);
