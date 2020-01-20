@@ -27,6 +27,8 @@ public class Player : MonoBehaviour {
 
     [HideInInspector] public float maxHyperTime, hyperTime, finalHyperTime;
 
+    CameraShake shake;
+
     void Start()
     {
         finalHealth = health = maxHealth;
@@ -36,6 +38,8 @@ public class Player : MonoBehaviour {
         adrenalineRanOut = shieldRanOut = true;
         maxHyperTime = 1;
         hyperTime = finalHyperTime = 0;
+
+        shake = GameObject.FindGameObjectWithTag("CamShake").GetComponent<CameraShake>();
     }
 
     void Update()
@@ -195,6 +199,7 @@ public class Player : MonoBehaviour {
         Instantiate(playerDeath, transform.position, Quaternion.identity);
         Destroy(gameObject);
         FindObjectOfType<AudioManager>().Play("PlayerDeath");
+        shake.CamShake("ShakeBig");
     }
 
 }

@@ -17,6 +17,7 @@ public class EnemyHealer : MonoBehaviour
     float laserSpeed;
     GameObject player;
     public GameObject enemyDeath;
+    CameraShake shake;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class EnemyHealer : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         laserSpeed = GameAssets.i.laserSpeed;
         player = GameAssets.i.player;
+        shake = GameObject.FindGameObjectWithTag("CamShake").GetComponent<CameraShake>(); ;
     }
 
     void Update()
@@ -141,5 +143,6 @@ public class EnemyHealer : MonoBehaviour
         Instantiate(enemyDeath, transform.position, Quaternion.identity);
         Destroy(gameObject);
         FindObjectOfType<AudioManager>().Play("EnemyDeath");
+        shake.CamShake("ShakeSmall");
     }
 }

@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     public bool predictor;
     float laserSpeed;
     public GameObject enemyDeath;
+    CameraShake shake;
 
     void Start()
     {
@@ -24,6 +25,8 @@ public class Enemy : MonoBehaviour
         target = GameAssets.i.player;
         rb = GetComponent<Rigidbody2D>();
         laserSpeed = GameAssets.i.laserSpeed;
+
+        shake = GameObject.FindGameObjectWithTag("CamShake").GetComponent<CameraShake>();
     }
 
     void Update()
@@ -110,5 +113,6 @@ public class Enemy : MonoBehaviour
         Instantiate(enemyDeath, transform.position, Quaternion.identity);
         Destroy(gameObject);
         FindObjectOfType<AudioManager>().Play("EnemyDeath");
+        shake.CamShake("ShakeSmall");
     }
 }

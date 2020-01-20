@@ -11,6 +11,7 @@ TagManager:
   - greenPill
   - Adrenaline
   - ShieldPowerUp
+  - CamShake
   layers:
   - Default
   - TransparentFX
