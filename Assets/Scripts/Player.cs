@@ -21,13 +21,11 @@ public class Player : MonoBehaviour {
     Vector2 pos;
     public GameObject playerDeath;
 
-    [HideInInspector] public bool hyper;
-
     [HideInInspector] public enum ShieldState
     { disabled, power1, power2, power3 }
     [HideInInspector] public ShieldState state;
 
-    [HideInInspector] public float hyperTime, lastingHyperTime;
+    [HideInInspector] public float maxHyperTime, hyperTime, finalHyperTime;
 
     void Start()
     {
@@ -35,33 +33,31 @@ public class Player : MonoBehaviour {
         mapSize = GameAssets.i.mapSize;
         rb = GetComponent<Rigidbody2D>();
 
-        hyper = false;
         adrenalineRanOut = shieldRanOut = true;
-        hyperTime = lastingHyperTime = 1f;
+        maxHyperTime = 1;
+        hyperTime = finalHyperTime = 0;
     }
 
     void Update()
     {
-        if (!hyper)
+        if (finalHyperTime <= 0)
             Movement(1, 2, 1);
-        else if (hyperTime < lastingHyperTime && hyper)
+        else
         {
             Movement(3, 5, 2);
-            hyperTime += Time.deltaTime;
-            if (hyperTime >= lastingHyperTime - 1.5f && !adrenalineRanOut)
+            finalHyperTime -= Time.deltaTime;
+            if (finalHyperTime <= 1f && !adrenalineRanOut)
             {
                 FindObjectOfType<AudioManager>().Play("AdrenalineRanOut");
                 adrenalineRanOut = true;
             }
-
-            if (hyperTime > lastingHyperTime)
-            {
-                hyperTime = lastingHyperTime;
-                hyper = false;
-            }
         }
 
-        hypedTimer.fillAmount = (lastingHyperTime - hyperTime) / lastingHyperTime;
+        if (Mathf.Abs(hyperTime - finalHyperTime) > 0f)
+            hyperTime -= Time.deltaTime * (hyperTime - finalHyperTime) * 5;
+        hypedTimer.fillAmount = hyperTime / maxHyperTime;
+        
+        
 
         HealthHandle();
         ShieldHandle();

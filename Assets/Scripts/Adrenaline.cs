@@ -40,10 +40,9 @@ public class Adrenaline : MonoBehaviour
     {
         if (player)
         {
-            player.GetComponent<Player>().hyper = true;
             player.GetComponent<Player>().adrenalineRanOut = false;
-            player.GetComponent<Player>().lastingHyperTime = lastingTime;
-            player.GetComponent<Player>().hyperTime = 0;
+            player.GetComponent<Player>().maxHyperTime = lastingTime;
+            player.GetComponent<Player>().finalHyperTime = lastingTime;
             Instantiate(pickUp, transform.position, transform.rotation);
             Destroy(gameObject);
         }
