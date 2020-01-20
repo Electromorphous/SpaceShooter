@@ -58,117 +58,121 @@ public class GameHandler : MonoBehaviour
     {
         Vector2 target = cam.ScreenToWorldPoint(Input.mousePosition);
         cursor.transform.position = target;
-        playerPos = GameAssets.i.player.transform;
 
-        pairTime += Time.deltaTime;
-        hexTime += Time.deltaTime;
-        normTime += Time.deltaTime;
-        healerTime += Time.deltaTime;
-        predictorTime += Time.deltaTime;
-
-        yellowTime += Time.deltaTime;
-        blueTime += Time.deltaTime;
-        greenTime += Time.deltaTime;
-        shieldTime += Time.deltaTime;
-        adrenalineTime += Time.deltaTime;
-
-        Vector2 spawnPos;
-        if (pairTime >= pairSpawnDelay)
+        if (GameAssets.i.player)
         {
-            spawnPos = RandomSpawnEnemy();
-            Instantiate(pairPrefab, spawnPos, Quaternion.identity);
-            Instantiate(pairPrefab, spawnPos, Quaternion.identity);
-            pairTime -= pairSpawnDelay;
-        }
+            playerPos = GameAssets.i.player.transform;
 
-        if (hexTime >= hexSpawnDelay)
-        {
-            spawnPos = RandomSpawnEnemy();
-            Instantiate(hexPrefab, spawnPos, Quaternion.identity);
-            Instantiate(hexPrefab, spawnPos, Quaternion.identity);
-            Instantiate(hexPrefab, spawnPos, Quaternion.identity);
-            Instantiate(hexPrefab, spawnPos, Quaternion.identity);
-            Instantiate(hexPrefab, spawnPos, Quaternion.identity);
-            Instantiate(hexPrefab, spawnPos, Quaternion.identity);
-            hexTime -= hexSpawnDelay;
-        }
+            pairTime += Time.deltaTime;
+            hexTime += Time.deltaTime;
+            normTime += Time.deltaTime;
+            healerTime += Time.deltaTime;
+            predictorTime += Time.deltaTime;
 
-        if (normTime >= normSpawnDelay)
-        {
-            Instantiate(normPrefab, RandomSpawnEnemy(), Quaternion.identity);
-            normTime -= normSpawnDelay;
-        }
+            yellowTime += Time.deltaTime;
+            blueTime += Time.deltaTime;
+            greenTime += Time.deltaTime;
+            shieldTime += Time.deltaTime;
+            adrenalineTime += Time.deltaTime;
 
-        if (healerTime >= healerSpawnDelay)
-        {
-            Instantiate(healerPrefab, RandomSpawnEnemy(), Quaternion.identity);
-            healerTime -= healerSpawnDelay;
-        }
-
-        if (predictorTime >= predictorSpawnDelay)
-        {
-            Instantiate(predictorPrefab, RandomSpawnEnemy(), Quaternion.identity);
-            predictorTime -= predictorSpawnDelay;
-        }
-
-        if (yellowTime >= yellowDelay)
-        {
-            do
+            Vector2 spawnPos;
+            if (pairTime >= pairSpawnDelay)
             {
-                spawnPos = RandomSpawnPower();
-            } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
+                spawnPos = RandomSpawnEnemy();
+                Instantiate(pairPrefab, spawnPos, Quaternion.identity);
+                Instantiate(pairPrefab, spawnPos, Quaternion.identity);
+                pairTime -= pairSpawnDelay;
+            }
 
-            Instantiate(pillSpawn, spawnPos, Quaternion.identity);
-            Instantiate(yellowPillPrefab, spawnPos, Quaternion.identity);
-            yellowTime -= yellowDelay;
-        }
-
-        if (blueTime >= blueDelay)
-        {
-            do
+            if (hexTime >= hexSpawnDelay)
             {
-                spawnPos = RandomSpawnPower();
-            } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
+                spawnPos = RandomSpawnEnemy();
+                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+                hexTime -= hexSpawnDelay;
+            }
 
-            Instantiate(pillSpawn, spawnPos, Quaternion.identity);
-            Instantiate(bluePillPrefab, spawnPos, Quaternion.identity);
-            blueTime -= blueDelay;
-        }
-
-        if (greenTime >= greenDelay)
-        {
-            do
+            if (normTime >= normSpawnDelay)
             {
-                spawnPos = RandomSpawnPower();
-            } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
+                Instantiate(normPrefab, RandomSpawnEnemy(), Quaternion.identity);
+                normTime -= normSpawnDelay;
+            }
 
-            Instantiate(pillSpawn, spawnPos, Quaternion.identity);
-            Instantiate(greenPillPrefab, spawnPos, Quaternion.identity);
-            greenTime -= greenDelay;
-        }
-
-        if (shieldTime >= shieldDelay)
-        {
-            do
+            if (healerTime >= healerSpawnDelay)
             {
-                spawnPos = RandomSpawnPower();
-            } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
+                Instantiate(healerPrefab, RandomSpawnEnemy(), Quaternion.identity);
+                healerTime -= healerSpawnDelay;
+            }
 
-            Instantiate(shieldSpawn, spawnPos, Quaternion.identity);
-            Instantiate(shieldPrefab, spawnPos, Quaternion.identity);
-            shieldTime -= shieldDelay;
-        }
-
-        if (adrenalineTime >= adrenalineDelay)
-        {
-            do
+            if (predictorTime >= predictorSpawnDelay)
             {
-                spawnPos = RandomSpawnPower();
-            } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
+                Instantiate(predictorPrefab, RandomSpawnEnemy(), Quaternion.identity);
+                predictorTime -= predictorSpawnDelay;
+            }
 
-            Instantiate(adrenalineSpawn, spawnPos, Quaternion.identity);
-            Instantiate(adrenalinePrefab, spawnPos, Quaternion.identity);
-            adrenalineTime -= adrenalineDelay;
+            if (yellowTime >= yellowDelay)
+            {
+                do
+                {
+                    spawnPos = RandomSpawnPower();
+                } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
+
+                Instantiate(pillSpawn, spawnPos, Quaternion.identity);
+                Instantiate(yellowPillPrefab, spawnPos, Quaternion.identity);
+                yellowTime -= yellowDelay;
+            }
+
+            if (blueTime >= blueDelay)
+            {
+                do
+                {
+                    spawnPos = RandomSpawnPower();
+                } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
+
+                Instantiate(pillSpawn, spawnPos, Quaternion.identity);
+                Instantiate(bluePillPrefab, spawnPos, Quaternion.identity);
+                blueTime -= blueDelay;
+            }
+
+            if (greenTime >= greenDelay)
+            {
+                do
+                {
+                    spawnPos = RandomSpawnPower();
+                } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
+
+                Instantiate(pillSpawn, spawnPos, Quaternion.identity);
+                Instantiate(greenPillPrefab, spawnPos, Quaternion.identity);
+                greenTime -= greenDelay;
+            }
+
+            if (shieldTime >= shieldDelay)
+            {
+                do
+                {
+                    spawnPos = RandomSpawnPower();
+                } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
+
+                Instantiate(shieldSpawn, spawnPos, Quaternion.identity);
+                Instantiate(shieldPrefab, spawnPos, Quaternion.identity);
+                shieldTime -= shieldDelay;
+            }
+
+            if (adrenalineTime >= adrenalineDelay)
+            {
+                do
+                {
+                    spawnPos = RandomSpawnPower();
+                } while (Vector2.Distance(spawnPos, playerPos.position) <= 0.7f);
+
+                Instantiate(adrenalineSpawn, spawnPos, Quaternion.identity);
+                Instantiate(adrenalinePrefab, spawnPos, Quaternion.identity);
+                adrenalineTime -= adrenalineDelay;
+            }
         }
     }
 

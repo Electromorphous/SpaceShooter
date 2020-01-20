@@ -20,17 +20,20 @@ public class Pill : MonoBehaviour
     }
     void Update()
     {
-        float angle = transform.eulerAngles.z;
-        angle += 333f * Time.deltaTime;
-        transform.eulerAngles = new Vector3(0, 0, angle);
-
-        health = player.GetComponent<Player>().finalHealth;
-
-        time += Time.deltaTime;
-        if (time >= lifeSpan)
+        if (player)
         {
-            Instantiate(vanish, transform.position, transform.rotation);
-            Destroy(gameObject);
+            float angle = transform.eulerAngles.z;
+            angle += 333f * Time.deltaTime;
+            transform.eulerAngles = new Vector3(0, 0, angle);
+
+            health = player.GetComponent<Player>().finalHealth;
+
+            time += Time.deltaTime;
+            if (time >= lifeSpan)
+            {
+                Instantiate(vanish, transform.position, transform.rotation);
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -39,18 +42,22 @@ public class Pill : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             PickUp();
+            FindObjectOfType<AudioManager>().Play("PillPickUp");
         }
     }
 
     void PickUp()
     {
-        health += maxHealth * healing;
-        if (health > maxHealth)
-            health = maxHealth;
-        player.GetComponent<Player>().finalHealth = health;
-        //GameAssets.i.ChangeColor("00ff00");
-        Instantiate(pickUp, transform.position, transform.rotation);
-        Destroy(gameObject);
+        if (player)
+        {
+            health += maxHealth * healing;
+            if (health > maxHealth)
+                health = maxHealth;
+            player.GetComponent<Player>().finalHealth = health;
+            //GameAssets.i.ChangeColor("00ff00");
+            Instantiate(pickUp, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
 
 }

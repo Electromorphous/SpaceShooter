@@ -27,21 +27,24 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(transform.position, target.transform.position) > attackRange)
+        if (target)
         {
-            Movement();
-            enemyGun.GetComponent<EnemyGun>().shoot = false;
+            if (Vector3.Distance(transform.position, target.transform.position) > attackRange)
+            {
+                Movement();
+                enemyGun.GetComponent<EnemyGun>().shoot = false;
+            }
+            else
+            {
+                rb.drag = 3;
+                enemyGun.GetComponent<EnemyGun>().shoot = true;
+            }
+
+            if (!predictor)
+                Look();
+            else
+                PredictLook();
         }
-        else
-        {
-            rb.drag = 3;
-            enemyGun.GetComponent<EnemyGun>().shoot = true;
-        }
-        
-        if (!predictor)
-            Look();
-        else
-            PredictLook();
 
         healthBar.fillAmount = health / maxHealth;
     }

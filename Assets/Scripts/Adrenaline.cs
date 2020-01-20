@@ -32,16 +32,21 @@ public class Adrenaline : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PickUp();
+            FindObjectOfType<AudioManager>().Play("AdrenalinePickUp");
         }
     }
 
     void PickUp()
     {
-        player.GetComponent<Player>().hyper = true;
-        player.GetComponent<Player>().lastingHyperTime = lastingTime;
-        player.GetComponent<Player>().hyperTime = 0;
-        Instantiate(pickUp, transform.position, transform.rotation);
-        Destroy(gameObject);
+        if (player)
+        {
+            player.GetComponent<Player>().hyper = true;
+            player.GetComponent<Player>().adrenalineRanOut = false;
+            player.GetComponent<Player>().lastingHyperTime = lastingTime;
+            player.GetComponent<Player>().hyperTime = 0;
+            Instantiate(pickUp, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
 }
 

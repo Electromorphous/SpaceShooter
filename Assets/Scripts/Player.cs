@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
     public float force;
     float moveX, moveY;
     [HideInInspector] public float finalHealth, finalShield;
+    [HideInInspector] public bool adrenalineRanOut, shieldRanOut;
     float health, shield;
     public int maxHealth, maxShield;
     public GameObject damage, shieldSprite;
@@ -34,23 +35,29 @@ public class Player : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
 
         hyper = false;
+        adrenalineRanOut = shieldRanOut = true;
         hyperTime = lastingHyperTime = 1f;
     }
 
     void Update()
     {
-        if (hyper == false)
+        if (!hyper)
             Movement(1, 2, 1);
-        else if (hyperTime < lastingHyperTime && hyper == true)
+        else if (hyperTime < lastingHyperTime && hyper)
         {
             Movement(3, 5, 2);
             hyperTime += Time.deltaTime;
-        }
+            if (hyperTime >= lastingHyperTime - 1.5f && !adrenalineRanOut)
+            {
+                FindObjectOfType<AudioManager>().Play("AdrenalineRanOut");
+                adrenalineRanOut = true;
+            }
 
-        if (hyperTime > lastingHyperTime)
-        {
-            hyperTime = lastingHyperTime;
-            hyper = false;
+            if (hyperTime > lastingHyperTime)
+            {
+                hyperTime = lastingHyperTime;
+                hyper = false;
+            }
         }
 
         hypedTimer.fillAmount = (lastingHyperTime - hyperTime) / lastingHyperTime;
@@ -173,10 +180,17 @@ public class Player : MonoBehaviour {
         if (state == ShieldState.disabled)
             finalHealth = health - damage;
         else
+        {
             finalShield = shield - damage;
+            if (finalShield <= 0 && !shieldRanOut)
+            {
+                finalShield = 0;
+                FindObjectOfType<AudioManager>().Play("ShieldDown");
+                shieldRanOut = true;
+            }
+        }
 
-        DamagePopup.Create(transform.position, damage);
-
+            DamagePopup.Create(transform.position, damage);
     }
 
     void Die()

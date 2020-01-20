@@ -19,14 +19,16 @@ public class ShieldPowerUp : MonoBehaviour
     }
     void Update()
     {
-        
-        shield = player.GetComponent<Player>().finalShield;
-
-        time += Time.deltaTime;
-        if (time >= lifeSpan)
+        if (player)
         {
-            Instantiate(vanish, transform.position, transform.rotation);
-            Destroy(gameObject);
+            shield = player.GetComponent<Player>().finalShield;
+
+            time += Time.deltaTime;
+            if (time >= lifeSpan)
+            {
+                Instantiate(vanish, transform.position, transform.rotation);
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -35,17 +37,21 @@ public class ShieldPowerUp : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             PickUp();
+            FindObjectOfType<AudioManager>().Play("ShieldUp");
         }
     }
 
     void PickUp()
     {
-        shield += maxShield * shielding;
-        if (shield > maxShield)
-            shield = maxShield;
-        player.GetComponent<Player>().finalShield = shield;
-
-        Instantiate(pickUp, transform.position, transform.rotation);
-        Destroy(gameObject);
+        if (player)
+        {
+            shield += maxShield * shielding;
+            if (shield > maxShield)
+                shield = maxShield;
+            player.GetComponent<Player>().finalShield = shield;
+            player.GetComponent<Player>().shieldRanOut = false;
+            Instantiate(pickUp, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
 }
