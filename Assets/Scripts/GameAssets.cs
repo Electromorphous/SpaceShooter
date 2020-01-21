@@ -74,7 +74,7 @@ public class GameAssets : MonoBehaviour {
         if (hex.Length >= 8)
             a = HexToFloatNormalized(hex.Substring(6, 2));
 
-        while(r < 1 || g < 1 || b < 1 || a < 1)
+        while((r < 1 || g < 1 || b < 1 || a < 1) && colorChanging)
         {
             
             colorChanging.GetComponent<SpriteRenderer>().color = GetColorFromHex(FloatNormalizedToHex(r) + FloatNormalizedToHex(g) + FloatNormalizedToHex(b) + FloatNormalizedToHex(a));

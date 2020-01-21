@@ -12,12 +12,13 @@ public class Enemy : MonoBehaviour
     public float maxHealth;
     public Image healthBar;
     GameObject target;
-    public int attackRange;
+    public int attackRange, lookRange;
     public GameObject enemyGun;
     public bool predictor;
     float laserSpeed;
     public GameObject enemyDeath;
     CameraShake shake;
+    public int killPoints;
 
     void Start()
     {
@@ -27,18 +28,33 @@ public class Enemy : MonoBehaviour
         laserSpeed = GameAssets.i.laserSpeed;
 
         shake = GameObject.FindGameObjectWithTag("CamShake").GetComponent<CameraShake>();
+
+        StartCoroutine(EnterMap());
+        
+    }
+
+    IEnumerator EnterMap()
+    {
+        float i = 0;
+        while (i < 0.5f)
+        {
+            i += Time.deltaTime;
+            Movement();
+            yield return null;
+        }
+
     }
 
     void Update()
     {
         if (target)
         {
-            if (Vector3.Distance(transform.position, target.transform.position) > attackRange)
+            if (Vector3.Distance(transform.position, target.transform.position) > attackRange && Vector3.Distance(transform.position, target.transform.position) < lookRange)
             {
                 Movement();
                 enemyGun.GetComponent<EnemyGun>().shoot = false;
             }
-            else
+            else if(Vector3.Distance(transform.position, target.transform.position) < attackRange)
             {
                 rb.drag = 3;
                 enemyGun.GetComponent<EnemyGun>().shoot = true;
@@ -95,7 +111,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        StartCoroutine(GameAssets.i.ChangeColor("ff3333", gameObject, null));
+        StartCoroutine(GameAssets.i.ChangeColor("ff0000", gameObject, null));
 
         DamagePopup.Create(transform.position, damage);
 
@@ -113,6 +129,7 @@ public class Enemy : MonoBehaviour
     {
         Instantiate(enemyDeath, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        target.GetComponent<Player>().score += killPoints;
         FindObjectOfType<AudioManager>().Play("EnemyDeath");
         shake.CamShake("ShakeSmall");
     }

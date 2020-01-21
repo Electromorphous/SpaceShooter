@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
+    float difficulty = 0;
+
     public GameObject pairPrefab;
-    public float pairSpawnDelay;
-    float pairTime;
+    float pairCount;
     public GameObject hexPrefab;
-    public float hexSpawnDelay;
-    float hexTime;
+    float hexCount;
     public GameObject normPrefab;
-    public float normSpawnDelay;
-    float normTime;
+    float normCount;
     public GameObject healerPrefab;
-    public float healerSpawnDelay;
-    float healerTime;
+    float healerCount;
     public GameObject predictorPrefab;
-    public float predictorSpawnDelay;
-    float predictorTime;
+    float predictorCount;
 
     public GameObject star1;
     public GameObject star2;
@@ -34,10 +31,13 @@ public class GameHandler : MonoBehaviour
     float yellowTime, blueTime, greenTime, shieldTime, adrenalineTime;
     public GameObject pillSpawn, shieldSpawn, adrenalineSpawn;
 
+    GameObject player;
+
     void Start()
     {
+        player = GameAssets.i.player;
 
-        yellowTime = blueTime = greenTime = shieldTime = pairTime = hexTime = normTime = healerTime = predictorTime = 0;
+        yellowTime = blueTime = greenTime = shieldTime = 0;
 
         mapSize = GameAssets.i.mapSize;
         starCount = mapSize / 2;
@@ -56,18 +56,21 @@ public class GameHandler : MonoBehaviour
 
     void Update()
     {
-        Vector2 target = cam.ScreenToWorldPoint(Input.mousePosition);
-        cursor.transform.position = target;
-
         if (GameAssets.i.player)
         {
+            difficulty =  player.GetComponent<Player>().score / 222f;
+        
+            Vector2 target = cam.ScreenToWorldPoint(Input.mousePosition);
+
+            cursor.transform.position = target;
+
             playerPos = GameAssets.i.player.transform;
 
-            pairTime += Time.deltaTime;
-            hexTime += Time.deltaTime;
-            normTime += Time.deltaTime;
-            healerTime += Time.deltaTime;
-            predictorTime += Time.deltaTime;
+            pairCount = difficulty * 2 + 2;
+            hexCount = difficulty * 6 + 2;
+            normCount = difficulty + 1;
+            healerCount = difficulty;
+            predictorCount = difficulty;
 
             yellowTime += Time.deltaTime;
             blueTime += Time.deltaTime;
@@ -76,42 +79,32 @@ public class GameHandler : MonoBehaviour
             adrenalineTime += Time.deltaTime;
 
             Vector2 spawnPos;
-            if (pairTime >= pairSpawnDelay)
+            
+            if (GameObject.FindGameObjectsWithTag("Pair").GetLength(0) < pairCount)
             {
                 spawnPos = RandomSpawnEnemy();
                 Instantiate(pairPrefab, spawnPos, Quaternion.identity);
-                Instantiate(pairPrefab, spawnPos, Quaternion.identity);
-                pairTime -= pairSpawnDelay;
             }
 
-            if (hexTime >= hexSpawnDelay)
+            if (GameObject.FindGameObjectsWithTag("HexBros").GetLength(0) < hexCount)
             {
                 spawnPos = RandomSpawnEnemy();
                 Instantiate(hexPrefab, spawnPos, Quaternion.identity);
-                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
-                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
-                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
-                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
-                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
-                hexTime -= hexSpawnDelay;
             }
 
-            if (normTime >= normSpawnDelay)
+            if (GameObject.FindGameObjectsWithTag("Norm").GetLength(0) < normCount)
             {
                 Instantiate(normPrefab, RandomSpawnEnemy(), Quaternion.identity);
-                normTime -= normSpawnDelay;
             }
 
-            if (healerTime >= healerSpawnDelay)
+            if (GameObject.FindGameObjectsWithTag("Healer").GetLength(0) < healerCount)
             {
                 Instantiate(healerPrefab, RandomSpawnEnemy(), Quaternion.identity);
-                healerTime -= healerSpawnDelay;
             }
 
-            if (predictorTime >= predictorSpawnDelay)
+            if (GameObject.FindGameObjectsWithTag("Predictor").GetLength(0) < predictorCount)
             {
                 Instantiate(predictorPrefab, RandomSpawnEnemy(), Quaternion.identity);
-                predictorTime -= predictorSpawnDelay;
             }
 
             if (yellowTime >= yellowDelay)

@@ -29,6 +29,8 @@ public class Player : MonoBehaviour {
 
     CameraShake shake;
 
+    [HideInInspector] public int score;
+
     void Start()
     {
         finalHealth = health = maxHealth;
@@ -41,10 +43,12 @@ public class Player : MonoBehaviour {
 
         shake = GameObject.FindGameObjectWithTag("CamShake").GetComponent<CameraShake>();
 
+        score = 0;
     }
 
     void Update()
     {
+        
         if (finalHyperTime <= 0)
             Movement(1, 2, 1);
         else
@@ -182,7 +186,7 @@ public class Player : MonoBehaviour {
         if (state == ShieldState.disabled)
         {
             finalHealth = health - damage;
-            StartCoroutine(GameAssets.i.ChangeColor("ff3333", gameObject, null));
+            StartCoroutine(GameAssets.i.ChangeColor("ff0000", gameObject, null));
         }
         else
         {

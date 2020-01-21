@@ -15,13 +15,14 @@ public class PlayerGun : MonoBehaviour
         time += Time.deltaTime;
         if(Input.GetButton("Fire1") && time >= 0.1f)
         {
-            shootLaser();
+            ShootLaser();
             time = 0;
         }
     }
-    public void shootLaser(){
+    public void ShootLaser(){
 
         GameObject laser = Instantiate(laserPrefab, gun.position, gun.rotation);
+        FindObjectOfType<AudioManager>().Play("PlayerLaser");
         laser.GetComponent<Laser>().damage = damage;        
     }
 }

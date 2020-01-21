@@ -125,10 +125,12 @@ MonoBehaviour:
   maxHealth: 120
   healthBar: {fileID: 7418719267628566310}
   attackRange: 10
+  lookRange: 15
   enemyGun: {fileID: 2895603200518949009}
   predictor: 0
   enemyDeath: {fileID: 6159322876686328272, guid: bb98a0396f1ef5949884b76fb2588502,
     type: 3}
+  killPoints: 15
 --- !u!60 &4656807291579316516
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -397,7 +399,7 @@ GameObject:
   - component: {fileID: 8671107914248673071}
   m_Layer: 0
   m_Name: NormGun
-  m_TagString: Untagged
+  m_TagString: Norm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -430,9 +432,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserPrefab: {fileID: 6134650772774935171, guid: 2114c8278de4dca419e495c130d84f67,
     type: 3}
-  shootDelay: 0.2
+  shootDelay: 0.8
   shoot: 0
   damage: 23
+  pulse: 1
 --- !u!1 &8000114911760899936
 GameObject:
   m_ObjectHideFlags: 0

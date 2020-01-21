@@ -127,6 +127,7 @@ MonoBehaviour:
   enemyGun: {fileID: 2895603200518949009}
   enemyDeath: {fileID: 6159322876686328272, guid: bb98a0396f1ef5949884b76fb2588502,
     type: 3}
+  killPoints: 5
 --- !u!60 &4025790626926379161
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -384,8 +385,8 @@ GameObject:
   - component: {fileID: 5963463017031347525}
   - component: {fileID: 8671107914248673071}
   m_Layer: 0
-  m_Name: HexBrosGun
-  m_TagString: Untagged
+  m_Name: HealerGun
+  m_TagString: Healer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -418,9 +419,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserPrefab: {fileID: 6134650772774935171, guid: 7904afa2eb2b9964ebed10530c02c8ca,
     type: 3}
-  shootDelay: 0.4
+  shootDelay: 0.3
   shoot: 0
   damage: -10
+  pulse: 0
 --- !u!1 &8000114911760899936
 GameObject:
   m_ObjectHideFlags: 0

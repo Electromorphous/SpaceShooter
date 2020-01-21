@@ -8,6 +8,7 @@ public class EnemyHealer : MonoBehaviour
     Rigidbody2D rb;
     public float force;
     float moveX, moveY;
+    int mapSize;
     float health;
     public float maxHealth;
     public Image healthBar;
@@ -18,14 +19,16 @@ public class EnemyHealer : MonoBehaviour
     GameObject player;
     public GameObject enemyDeath;
     CameraShake shake;
-
+    public int killPoints;
+    
     void Start()
     {
+        mapSize = GameAssets.i.mapSize;
         health = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         laserSpeed = GameAssets.i.laserSpeed;
         player = GameAssets.i.player;
-        shake = GameObject.FindGameObjectWithTag("CamShake").GetComponent<CameraShake>(); ;
+        shake = GameObject.FindGameObjectWithTag("CamShake").GetComponent<CameraShake>();
     }
 
     void Update()
@@ -111,6 +114,8 @@ public class EnemyHealer : MonoBehaviour
 
         moveX = moveY = 0;
 
+        if (Mathf.Abs(transform.position.x) > mapSize + 7 || Mathf.Abs(transform.position.y) > mapSize + 7)
+            Destroy(gameObject);
     }
 
     void PredictLook()
@@ -125,7 +130,7 @@ public class EnemyHealer : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        StartCoroutine(GameAssets.i.ChangeColor("ff3333", gameObject, null));
+        StartCoroutine(GameAssets.i.ChangeColor("ff0000", gameObject, null));
 
         DamagePopup.Create(transform.position, damage);
 
@@ -143,6 +148,7 @@ public class EnemyHealer : MonoBehaviour
     {
         Instantiate(enemyDeath, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        player.GetComponent<Player>().score += killPoints;
         FindObjectOfType<AudioManager>().Play("EnemyDeath");
         shake.CamShake("ShakeSmall");
     }

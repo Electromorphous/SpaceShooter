@@ -125,10 +125,12 @@ MonoBehaviour:
   maxHealth: 120
   healthBar: {fileID: 7418719267628566310}
   attackRange: 12
+  lookRange: 20
   enemyGun: {fileID: 2895603200518949009}
   predictor: 1
   enemyDeath: {fileID: 6159322876686328272, guid: bb98a0396f1ef5949884b76fb2588502,
     type: 3}
+  killPoints: 25
 --- !u!60 &6470369455042781293
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -394,7 +396,7 @@ GameObject:
   - component: {fileID: 8671107914248673071}
   m_Layer: 0
   m_Name: PredictorGun
-  m_TagString: Untagged
+  m_TagString: Predictor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -430,6 +432,7 @@ MonoBehaviour:
   shootDelay: 0.3
   shoot: 0
   damage: 38
+  pulse: 0
 --- !u!1 &8000114911760899936
 GameObject:
   m_ObjectHideFlags: 0

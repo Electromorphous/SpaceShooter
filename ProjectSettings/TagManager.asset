@@ -12,6 +12,11 @@ TagManager:
   - Adrenaline
   - ShieldPowerUp
   - CamShake
+  - Healer
+  - HexBros
+  - Norm
+  - Pair
+  - Predictor
   layers:
   - Default
   - TransparentFX
