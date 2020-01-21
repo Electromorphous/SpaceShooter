@@ -43,8 +43,8 @@ public class Adrenaline : MonoBehaviour
             player.GetComponent<Player>().adrenalineRanOut = false;
             player.GetComponent<Player>().maxHyperTime = lastingTime;
             player.GetComponent<Player>().finalHyperTime = lastingTime;
+            StartCoroutine(GameAssets.i.ChangeColor("ffff00", player, gameObject));
             Instantiate(pickUp, transform.position, transform.rotation);
-            Destroy(gameObject);
         }
     }
 }

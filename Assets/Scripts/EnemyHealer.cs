@@ -125,6 +125,7 @@ public class EnemyHealer : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        StartCoroutine(GameAssets.i.ChangeColor("ff3333", gameObject, null));
 
         DamagePopup.Create(transform.position, damage);
 

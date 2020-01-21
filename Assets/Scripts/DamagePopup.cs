@@ -31,7 +31,7 @@ public class DamagePopup : MonoBehaviour
         }
         else
         {
-            textColor = Color.green;
+            textColor = GameAssets.i.GetColorFromHex("62F171");
             damage = -damage;
             textMesh.SetText(damage.ToString());
         }

@@ -40,6 +40,7 @@ public class Player : MonoBehaviour {
         hyperTime = finalHyperTime = 0;
 
         shake = GameObject.FindGameObjectWithTag("CamShake").GetComponent<CameraShake>();
+
     }
 
     void Update()
@@ -179,7 +180,10 @@ public class Player : MonoBehaviour {
     public void TakeDamage(int damage)
     {
         if (state == ShieldState.disabled)
+        {
             finalHealth = health - damage;
+            StartCoroutine(GameAssets.i.ChangeColor("ff3333", gameObject, null));
+        }
         else
         {
             finalShield = shield - damage;

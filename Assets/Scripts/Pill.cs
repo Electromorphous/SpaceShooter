@@ -45,7 +45,7 @@ public class Pill : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("PillPickUp");
         }
     }
-
+    
     void PickUp()
     {
         if (player)
@@ -54,9 +54,8 @@ public class Pill : MonoBehaviour
             if (health > maxHealth)
                 health = maxHealth;
             player.GetComponent<Player>().finalHealth = health;
-            //GameAssets.i.ChangeColor("00ff00");
+            StartCoroutine(GameAssets.i.ChangeColor("00ff00", player, gameObject));
             Instantiate(pickUp, transform.position, transform.rotation);
-            Destroy(gameObject);
         }
     }
 

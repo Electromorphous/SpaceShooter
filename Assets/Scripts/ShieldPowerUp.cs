@@ -50,8 +50,8 @@ public class ShieldPowerUp : MonoBehaviour
                 shield = maxShield;
             player.GetComponent<Player>().finalShield = shield;
             player.GetComponent<Player>().shieldRanOut = false;
+            StartCoroutine(GameAssets.i.ChangeColor("0000ff", player, gameObject));
             Instantiate(pickUp, transform.position, transform.rotation);
-            Destroy(gameObject);
         }
     }
 }
