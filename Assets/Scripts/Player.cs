@@ -34,8 +34,11 @@ public class Player : MonoBehaviour {
     [HideInInspector] public int finalScore;
     float score;
 
+    public GameObject gameOver;
+
     void Start()
     {
+        
         finalHealth = health = maxHealth;
         mapSize = GameAssets.i.mapSize;
         rb = GetComponent<Rigidbody2D>();
@@ -214,6 +217,7 @@ public class Player : MonoBehaviour {
         Destroy(gameObject);
         FindObjectOfType<AudioManager>().Play("PlayerDeath");
         shake.CamShake("ShakeBig");
+        gameOver.SetActive(true);
     }
 
 }

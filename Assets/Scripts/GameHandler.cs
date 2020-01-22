@@ -52,14 +52,16 @@ public class GameHandler : MonoBehaviour
         }
 
         Cursor.visible = false;
+
     }
 
     void Update()
     {
-        if (GameAssets.i.player)
+        if (player)
         {
-            difficulty =  player.GetComponent<Player>().finalScore / 222f;
-        
+
+            difficulty = player.GetComponent<Player>().finalScore / 222f;
+
             Vector2 target = cam.ScreenToWorldPoint(Input.mousePosition);
 
             cursor.transform.position = target;
@@ -79,7 +81,7 @@ public class GameHandler : MonoBehaviour
             adrenalineTime += Time.deltaTime;
 
             Vector2 spawnPos;
-            
+
             if (GameObject.FindGameObjectsWithTag("Pair").GetLength(0) < pairCount)
             {
                 spawnPos = RandomSpawnEnemy();
@@ -173,6 +175,8 @@ public class GameHandler : MonoBehaviour
                 adrenalineTime -= adrenalineDelay;
             }
         }
+        else
+            Cursor.visible = true;
     }
 
     Vector2 RandomSpawnEnemy()
