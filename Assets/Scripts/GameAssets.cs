@@ -80,22 +80,22 @@ public class GameAssets : MonoBehaviour {
             colorChanging.GetComponent<SpriteRenderer>().color = GetColorFromHex(FloatNormalizedToHex(r) + FloatNormalizedToHex(g) + FloatNormalizedToHex(b) + FloatNormalizedToHex(a));
 
             if (r < 1)
-                r += Time.deltaTime * 3;
+                r += Time.deltaTime * 4;
             else
                 r = 1;
 
             if (g < 1)
-                g += Time.deltaTime * 3;
+                g += Time.deltaTime * 4;
             else
                 g = 1;
 
             if (b < 1)
-                b += Time.deltaTime * 3;
+                b += Time.deltaTime * 4;
             else
                 b = 1;
 
             if (a < 1)
-                a += Time.deltaTime * 3;
+                a += Time.deltaTime * 4;
             else
                 a = 1;
 

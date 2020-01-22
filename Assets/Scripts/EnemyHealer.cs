@@ -47,7 +47,6 @@ public class EnemyHealer : MonoBehaviour
                 rb.drag = 3;
                 enemyGun.GetComponent<EnemyGun>().shoot = true;
             }
-
             PredictLook();
         }
         
@@ -148,7 +147,7 @@ public class EnemyHealer : MonoBehaviour
     {
         Instantiate(enemyDeath, transform.position, Quaternion.identity);
         Destroy(gameObject);
-        player.GetComponent<Player>().finalScore += killPoints;
+        FindObjectOfType<GameHandler>().finalScore += killPoints; 
         FindObjectOfType<AudioManager>().Play("EnemyDeath");
         shake.CamShake("ShakeSmall");
     }

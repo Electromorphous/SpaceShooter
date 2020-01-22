@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameHandler : MonoBehaviour
 {
@@ -33,8 +34,16 @@ public class GameHandler : MonoBehaviour
 
     GameObject player;
 
+    public TextMeshPro scoreText;
+    public TextMeshProUGUI highScoreText;
+    [HideInInspector] public int finalScore, highScore;
+    float score;
+
+    public GameObject gameOver;
+
     void Start()
     {
+
         player = GameAssets.i.player;
 
         yellowTime = blueTime = greenTime = shieldTime = 0;
@@ -53,14 +62,28 @@ public class GameHandler : MonoBehaviour
 
         Cursor.visible = false;
 
+        finalScore = highScore = 0;
+        score = 0;
     }
 
     void Update()
     {
+        
+        if (finalScore > score)
+            score += Time.deltaTime * 29;
+        score = Mathf.Round(score);
+        scoreText.text = score.ToString();
+        if(finalScore > highScore)
+        {
+            PlayerPrefs.SetInt("HighScore", finalScore);
+        }
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+        highScoreText.text = "HighScore : " + highScore.ToString();
+
         if (player)
         {
 
-            difficulty = player.GetComponent<Player>().finalScore / 222f;
+            difficulty = finalScore / 222f;
 
             Vector2 target = cam.ScreenToWorldPoint(Input.mousePosition);
 
@@ -68,8 +91,8 @@ public class GameHandler : MonoBehaviour
 
             playerPos = GameAssets.i.player.transform;
 
-            pairCount = difficulty + 2;
-            hexCount = difficulty + 2;
+            pairCount = difficulty * 2 + 2;
+            hexCount = difficulty * 6 + 2;
             normCount = difficulty + 1;
             healerCount = difficulty;
             predictorCount = difficulty;
@@ -176,7 +199,10 @@ public class GameHandler : MonoBehaviour
             }
         }
         else
+        {
             Cursor.visible = true;
+            gameOver.SetActive(true);
+        }
     }
 
     Vector2 RandomSpawnEnemy()
@@ -197,5 +223,11 @@ public class GameHandler : MonoBehaviour
     Vector2 RandomSpawnPower()
     {
         return new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
+    }
+
+    public void ResetHighScore()
+    {
+        PlayerPrefs.DeleteKey("HighScore");
+        //to delete all the saved data on the device use PlayerPrefs.DeleteAll();
     }
 }

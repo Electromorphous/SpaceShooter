@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class Player : MonoBehaviour {
 
@@ -21,7 +20,6 @@ public class Player : MonoBehaviour {
     Vector2 moveDir;
     Vector2 pos;
     public GameObject playerDeath;
-    public TextMeshPro scoretext;
 
     [HideInInspector] public enum ShieldState
     { disabled, power1, power2, power3 }
@@ -30,11 +28,6 @@ public class Player : MonoBehaviour {
     [HideInInspector] public float maxHyperTime, hyperTime, finalHyperTime;
 
     CameraShake shake;
-
-    [HideInInspector] public int finalScore;
-    float score;
-
-    public GameObject gameOver;
 
     void Start()
     {
@@ -49,7 +42,6 @@ public class Player : MonoBehaviour {
 
         shake = GameObject.FindGameObjectWithTag("CamShake").GetComponent<CameraShake>();
 
-        score = finalScore = 0;
     }
 
     void Update()
@@ -76,10 +68,6 @@ public class Player : MonoBehaviour {
         HealthHandle();
         ShieldHandle();
 
-        if (finalScore > score)
-            score += Time.deltaTime * 29;
-        score = Mathf.Round(score);
-        scoretext.text = score.ToString();
     }
 
     void ShieldHandle()
@@ -217,7 +205,6 @@ public class Player : MonoBehaviour {
         Destroy(gameObject);
         FindObjectOfType<AudioManager>().Play("PlayerDeath");
         shake.CamShake("ShakeBig");
-        gameOver.SetActive(true);
     }
 
 }

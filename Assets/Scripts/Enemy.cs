@@ -59,11 +59,13 @@ public class Enemy : MonoBehaviour
                 rb.drag = 3;
                 enemyGun.GetComponent<EnemyGun>().shoot = true;
             }
-
-            if (!predictor)
-                Look();
-            else
-                PredictLook();
+            if(Vector3.Distance(transform.position, target.transform.position) < lookRange)
+            {
+                if (!predictor)
+                    Look();
+                else
+                    PredictLook();
+            }
         }
 
         healthBar.fillAmount = health / maxHealth;
@@ -129,7 +131,7 @@ public class Enemy : MonoBehaviour
     {
         Instantiate(enemyDeath, transform.position, Quaternion.identity);
         Destroy(gameObject);
-        target.GetComponent<Player>().finalScore += killPoints;
+        FindObjectOfType<GameHandler>().finalScore += killPoints;
         FindObjectOfType<AudioManager>().Play("EnemyDeath");
         shake.CamShake("ShakeSmall");
     }
