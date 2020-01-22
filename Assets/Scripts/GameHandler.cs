@@ -58,7 +58,7 @@ public class GameHandler : MonoBehaviour
     {
         if (GameAssets.i.player)
         {
-            difficulty =  player.GetComponent<Player>().score / 222f;
+            difficulty =  player.GetComponent<Player>().finalScore / 222f;
         
             Vector2 target = cam.ScreenToWorldPoint(Input.mousePosition);
 
@@ -66,8 +66,8 @@ public class GameHandler : MonoBehaviour
 
             playerPos = GameAssets.i.player.transform;
 
-            pairCount = difficulty * 2 + 2;
-            hexCount = difficulty * 6 + 2;
+            pairCount = difficulty + 2;
+            hexCount = difficulty + 2;
             normCount = difficulty + 1;
             healerCount = difficulty;
             predictorCount = difficulty;
@@ -84,11 +84,17 @@ public class GameHandler : MonoBehaviour
             {
                 spawnPos = RandomSpawnEnemy();
                 Instantiate(pairPrefab, spawnPos, Quaternion.identity);
+                Instantiate(pairPrefab, spawnPos, Quaternion.identity);
             }
 
             if (GameObject.FindGameObjectsWithTag("HexBros").GetLength(0) < hexCount)
             {
                 spawnPos = RandomSpawnEnemy();
+                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
+                Instantiate(hexPrefab, spawnPos, Quaternion.identity);
                 Instantiate(hexPrefab, spawnPos, Quaternion.identity);
             }
 

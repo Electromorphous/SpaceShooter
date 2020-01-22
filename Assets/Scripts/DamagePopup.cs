@@ -26,12 +26,12 @@ public class DamagePopup : MonoBehaviour
 
         if (damage > 0)
         {
-            textColor = textMesh.color;
+            textColor = GameAssets.i.GetColorFromHex("FF3000");
             textMesh.SetText(damage.ToString());
         }
         else
         {
-            textColor = GameAssets.i.GetColorFromHex("62F171");
+            textColor = GameAssets.i.GetColorFromHex("1FFA2C");
             damage = -damage;
             textMesh.SetText(damage.ToString());
         }

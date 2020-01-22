@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour {
 
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour {
     Vector2 moveDir;
     Vector2 pos;
     public GameObject playerDeath;
+    public TextMeshPro scoretext;
 
     [HideInInspector] public enum ShieldState
     { disabled, power1, power2, power3 }
@@ -29,7 +31,8 @@ public class Player : MonoBehaviour {
 
     CameraShake shake;
 
-    [HideInInspector] public int score;
+    [HideInInspector] public int finalScore;
+    float score;
 
     void Start()
     {
@@ -43,7 +46,7 @@ public class Player : MonoBehaviour {
 
         shake = GameObject.FindGameObjectWithTag("CamShake").GetComponent<CameraShake>();
 
-        score = 0;
+        score = finalScore = 0;
     }
 
     void Update()
@@ -67,10 +70,13 @@ public class Player : MonoBehaviour {
         hypedTimer.fillAmount = hyperTime / maxHyperTime;
         
         
-
         HealthHandle();
         ShieldHandle();
 
+        if (finalScore > score)
+            score += Time.deltaTime * 29;
+        score = Mathf.Round(score);
+        scoretext.text = score.ToString();
     }
 
     void ShieldHandle()

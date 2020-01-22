@@ -148,7 +148,7 @@ public class EnemyHealer : MonoBehaviour
     {
         Instantiate(enemyDeath, transform.position, Quaternion.identity);
         Destroy(gameObject);
-        player.GetComponent<Player>().score += killPoints;
+        player.GetComponent<Player>().finalScore += killPoints;
         FindObjectOfType<AudioManager>().Play("EnemyDeath");
         shake.CamShake("ShakeSmall");
     }

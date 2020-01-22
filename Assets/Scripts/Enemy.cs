@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
     IEnumerator EnterMap()
     {
         float i = 0;
-        while (i < 0.5f)
+        while (i < 0.7f)
         {
             i += Time.deltaTime;
             Movement();
@@ -129,7 +129,7 @@ public class Enemy : MonoBehaviour
     {
         Instantiate(enemyDeath, transform.position, Quaternion.identity);
         Destroy(gameObject);
-        target.GetComponent<Player>().score += killPoints;
+        target.GetComponent<Player>().finalScore += killPoints;
         FindObjectOfType<AudioManager>().Play("EnemyDeath");
         shake.CamShake("ShakeSmall");
     }
