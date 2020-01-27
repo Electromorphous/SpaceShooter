@@ -36,7 +36,8 @@ public class Enemy : MonoBehaviour
     IEnumerator EnterMap()
     {
         float i = 0;
-        while (i < 0.7f)
+        float enterTime = Random.Range(0.5f, 1f);
+        while (i < enterTime)
         {
             i += Time.deltaTime;
             Movement();
@@ -67,7 +68,8 @@ public class Enemy : MonoBehaviour
                     PredictLook();
             }
         }
-
+        else
+            enemyGun.GetComponent<EnemyGun>().shoot = false;
         healthBar.fillAmount = health / maxHealth;
     }
 

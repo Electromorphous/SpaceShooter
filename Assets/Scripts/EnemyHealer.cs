@@ -63,6 +63,9 @@ public class EnemyHealer : MonoBehaviour
             }
         }
 
+        if(!player)
+            enemyGun.GetComponent<EnemyGun>().shoot = false;
+
         healthBar.fillAmount = health / maxHealth;
 
     }

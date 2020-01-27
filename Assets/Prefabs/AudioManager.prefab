@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4816518510101057018
+--- !u!1 &9042627119794629010
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4816518510101057020}
-  - component: {fileID: 4816518510101057019}
+  - component: {fileID: 3407435234606022291}
+  - component: {fileID: 8273826788083031761}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4816518510101057020
+--- !u!4 &3407435234606022291
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4816518510101057018}
+  m_GameObject: {fileID: 9042627119794629010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.2200751, z: -0.44000006}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,18 +31,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4816518510101057019
+--- !u!114 &8273826788083031761
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4816518510101057018}
+  m_GameObject: {fileID: 9042627119794629010}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fb76af4b1e541046a4b45f13ddab874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVolume: 1
   sounds:
   - name: ShieldUp
     clip: {fileID: 8300000, guid: 485a632be2b16db43a0d1c54a210bc11, type: 3}
@@ -51,6 +52,96 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: ShieldDown
+    clip: {fileID: 8300000, guid: 1c17e59062508c6448e6a6e28d5eae8f, type: 3}
+    volume: 0.48
+    pitch: 1.57
+    loop: 0
+    source: {fileID: 0}
+  - name: PillPickUp
+    clip: {fileID: 8300000, guid: b558cbae1f4f5ae4f8a1a6611d0ef35f, type: 3}
+    volume: 0.05
+    pitch: 1.5
+    loop: 0
+    source: {fileID: 0}
+  - name: AdrenalinePickUp
+    clip: {fileID: 8300000, guid: 6296c9870116fc0428114244f392dc41, type: 3}
+    volume: 0.07
+    pitch: 0.7
+    loop: 0
+    source: {fileID: 0}
+  - name: AdrenalineRanOut
+    clip: {fileID: 8300000, guid: 361ef245acfbf1c46bfcdee0f7b867bd, type: 3}
+    volume: 0.07
+    pitch: 0.7
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerDeath
+    clip: {fileID: 8300000, guid: fdb271911793b854d866e7030c4bb539, type: 3}
+    volume: 0.733
+    pitch: 0.5
+    loop: 0
+    source: {fileID: 0}
+  - name: EnemyDeath
+    clip: {fileID: 8300000, guid: fdb271911793b854d866e7030c4bb539, type: 3}
+    volume: 0.03
+    pitch: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerLaser
+    clip: {fileID: 8300000, guid: ff249a1f90eb3e247a03b28fa5b0a100, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EnemyLaser
+    clip: {fileID: 8300000, guid: 5314b71a14dc2b24fa9b3181293b68d8, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 1c17e59062508c6448e6a6e28d5eae8f, type: 3}
+    volume: 0.48
+    pitch: 1.57
+    loop: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 1c17e59062508c6448e6a6e28d5eae8f, type: 3}
+    volume: 0.48
+    pitch: 1.57
+    loop: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 1c17e59062508c6448e6a6e28d5eae8f, type: 3}
+    volume: 0.48
+    pitch: 1.57
+    loop: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 1c17e59062508c6448e6a6e28d5eae8f, type: 3}
+    volume: 0.48
+    pitch: 1.57
+    loop: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 1c17e59062508c6448e6a6e28d5eae8f, type: 3}
+    volume: 0.48
+    pitch: 1.57
+    loop: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 1c17e59062508c6448e6a6e28d5eae8f, type: 3}
+    volume: 0.48
+    pitch: 1.57
+    loop: 0
+    source: {fileID: 0}
+  - name: 
+    clip: {fileID: 8300000, guid: 1c17e59062508c6448e6a6e28d5eae8f, type: 3}
+    volume: 0.48
+    pitch: 1.57
+    loop: 0
+    source: {fileID: 0}
+  - name: 
     clip: {fileID: 8300000, guid: 1c17e59062508c6448e6a6e28d5eae8f, type: 3}
     volume: 0.48
     pitch: 1.57

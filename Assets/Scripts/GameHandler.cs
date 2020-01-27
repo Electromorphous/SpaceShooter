@@ -37,7 +37,6 @@ public class GameHandler : MonoBehaviour
     public TextMeshPro scoreText;
     public TextMeshProUGUI highScoreText;
     [HideInInspector] public int finalScore, highScore;
-    float score;
 
     public GameObject gameOver;
 
@@ -63,17 +62,13 @@ public class GameHandler : MonoBehaviour
         Cursor.visible = false;
 
         finalScore = highScore = 0;
-        score = 0;
     }
 
     void Update()
     {
-        
-        if (finalScore > score)
-            score += Time.deltaTime * 29;
-        score = Mathf.Round(score);
-        scoreText.text = score.ToString();
-        if(finalScore > highScore)
+
+        scoreText.text = finalScore.ToString();
+        if (finalScore > highScore)
         {
             PlayerPrefs.SetInt("HighScore", finalScore);
         }
@@ -208,7 +203,7 @@ public class GameHandler : MonoBehaviour
     Vector2 RandomSpawnEnemy()
     {
         Vector2 spawnPos;
-        int dir = Random.Range(1,5);
+        int dir = Random.Range(1, 5);
         if (dir == 1)
             spawnPos = new Vector2(Random.Range(-mapSize - 5, -mapSize), Random.Range(-mapSize - 5, mapSize + 5));
         else if (dir == 2)
@@ -223,11 +218,5 @@ public class GameHandler : MonoBehaviour
     Vector2 RandomSpawnPower()
     {
         return new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
-    }
-
-    public void ResetHighScore()
-    {
-        PlayerPrefs.DeleteKey("HighScore");
-        //to delete all the saved data on the device use PlayerPrefs.DeleteAll();
     }
 }

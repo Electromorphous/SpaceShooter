@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
 
             s.source.clip = s.clip;
             s.source.volume = s.volume * masterVolume;
-            s.source.pitch = s.pitch + UnityEngine.Random.Range(-0.2f, 0.2f);
+            s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
     }
