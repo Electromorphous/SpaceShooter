@@ -1,0 +1,16 @@
+{
+"companyName": "Electromorphous",
+"productName": "ShootLasers",
+"productVersion": "1",
+"dataUrl": "ShootLasers.data.unityweb",
+"wasmCodeUrl": "ShootLasers.wasm.code.unityweb",
+"wasmFrameworkUrl": "ShootLasers.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#06071A",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.2.18f1"
+}
